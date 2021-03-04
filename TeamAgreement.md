@@ -41,12 +41,12 @@ make a vote on which idea is more reasonable for the team on the long term then 
 
 
 ## Git Process
-  What components of your project will live on GitHub?
+ * What components of your project will live on GitHub?
     - the server,  database and the interface code.
     - api keys all **private** data should be in the .gitignore file as well as node_modules.
-  How will you share the repository with your teammates?
+ * How will you share the repository with your teammates?
     - I will be creating an organization on github and all memebers will grant access to our project to be able to read and write.
-  What is your Git flow?
+  * What is your Git flow?
       1. every new day, team memebers expected to make new pull request.
       2. at the end of the day you will push your work to your branch.
       3. on merge, all team members expected to gather and merge their work and done by leader.
