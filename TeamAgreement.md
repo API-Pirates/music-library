@@ -10,7 +10,7 @@
 ## communication plan:
   1. Each member of group expected to respect his teammates.
   2. We will have 1 hour meeting every morning, to talk about tasks.
-  4. In case any unexpected behaviour, it shall be added to github communication plan.
+  4. In case any unexpected behaviour and group notice a new rule should be added, it shall be added to github communication plan.
   5. Our decision will be based on voting, then leader decision.
   6. Please remember your voice is important and your idea is worth (even if it's not fully developed or a thought on the fly)
   7. The members will be reported to read the updates communication plan.
@@ -21,11 +21,8 @@
  9. Any idea you think worth to be shared to be added as a stretch goal please don't hesitate to do it.
 
 ## Conflict Plan : 
-1. To resolve conflict we discuss each person idea, and 
-make a vote on which idea is more reasonable for the team on the long term then choose it.
-
+1. To resolve conflict we discuss each person idea, and make a vote on which idea is more reasonable for the team on the long term then choose it.
 2. If conflict not resolved, the leader will make the choice to end the conflict.
-
 3.Members who are not contributing: 
  - The member is expected to explain why he is not contributing.
  - And the member expected to do his/her best and learn from this experience.
@@ -38,6 +35,7 @@ make a vote on which idea is more reasonable for the team on the long term then 
 
 * How you will identify tasks, assign tasks, know when they are complete, and manage work in general?
     - our app will be implented increamentally.
+    - after project is planned, everything will be shared on trello
 
 
 ## Git Process
