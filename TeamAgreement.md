@@ -18,7 +18,7 @@
       * We will have 10 minutes break each hour.
       * At 1 pm we will have 1 hour break.
       * At 3:30 we will have 15 minutes to pray.
-
+ 9. Any idea you think worth to be shared to be added as a stretch goal please don't hesitate to do it.
 
 ## Conflict Plan : 
 1. To resolve conflict we discuss each person idea, and 
