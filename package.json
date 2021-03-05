@@ -1,0 +1,20 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "Web appliction where user can search and find songs and details such as title, artist, genre as well as lyrics and events related to user query.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/API-Pirates/music-library.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/API-Pirates/music-library/issues"
+  },
+  "homepage": "https://github.com/API-Pirates/music-library#readme"
+}
