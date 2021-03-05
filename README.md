@@ -25,7 +25,7 @@
 ### Architecture
  * As for **language** this application uses Node.js.
  * **Packages** are express.js, pg for database, ejs for views, dotenv to manage environment variables.
- * Design : Music library uses CSS3 and SMACC's principles.
+ * Design : Music library uses CSS3 and SMACSS principles.
  * Vanilla.js for interactivity.
 
 ### How to use the application
