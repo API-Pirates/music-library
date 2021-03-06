@@ -27,7 +27,6 @@ app.get('/', handleHomePage)
 function handleHomePage(req, res) {
     res.render('index');
 }
-
 // .................................................................. CONNECTION
 
 client.connect()
