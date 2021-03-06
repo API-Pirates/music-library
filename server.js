@@ -1,10 +1,11 @@
 'use strict';
 // .......................................................................... IMPORTS
 const express = require('express');
-const cors = require('cors')
-const pg = require('pg')
+const cors = require('cors');
+const pg = require('pg');
 require('dotenv').config();
-const override = require('method-override')
+const override = require('method-override');
+const superAgent = require('superagent');
 // ........................................................................... CONFIGURATIONS
 const app = express();
 app.use(cors())
@@ -15,11 +16,11 @@ app.set('view engine', 'ejs');
 app.use(override('_method'));
 
 const PORT = process.env.PORT;
-// const client = new pg.Client(process.env.DATABASE_URL)
-const client = new pg.Client({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }
-});
+const client = new pg.Client(process.env.DATABASE_URL);
+// const client = new pg.Client({
+//     connectionString: process.env.DATABASE_URL,
+//     ssl: { rejectUnauthorized: false }
+// });
 // .............................................................................. ROUTES
 app.get('/', handleHomePage)
 
@@ -27,10 +28,10 @@ app.get('/', handleHomePage)
 function handleHomePage(req, res) {
     res.render('index');
 }
-// .................................................................. CONNECTION
+// .............................................................................. CONNECTION
 
 client.connect()
     .then(() => {
-        app.listen(PORT, () => { console.log('app is runnin on http://localhost:' + PORT) })
+        app.listen(PORT, () => { console.log('app is running on http://localhost:' + PORT) })
     })
-    .catch(error => console.log(error + ' error'))
+    .catch(error => console.log(error + ' error'));

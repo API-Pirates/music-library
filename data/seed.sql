@@ -10,7 +10,7 @@ INSERT INTO song (
     'song title',
     'artitst',
     'album ',
-    99.6,
+     99.6,
     'rock',
     'song lyrics',
     'default img url'
