@@ -6,7 +6,7 @@
  * Khalid Zyadeh.
  * Yahya Omari.
  * Rama Yaser.
- * amer Al Najjar.  
+ * Samer Al Najjar.  
   
 
 ### Description
