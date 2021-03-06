@@ -26,7 +26,7 @@
  * As for **language** this application uses Node.js.
  * **Packages** are express.js, pg for database, ejs for views, dotenv to manage environment variables.
  * Design : Music library uses CSS3 and SMACSS principles.
- * Vanilla.js for interactivity.
+ * Vanilla.js & JQuery for interactivity.
 
 ### How to use the application
   1. download source code.
@@ -39,4 +39,4 @@
   * **<span style="color:#f88f01"> PUT </span>**
   * **<span style="color:#fa1e0e"> DELETE </span>**
   
-## Database Schemas
+## Database Schemas 
