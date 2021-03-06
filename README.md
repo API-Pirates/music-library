@@ -40,3 +40,25 @@
   * **<span style="color:#fa1e0e"> DELETE </span>**
   
 ## Database Schemas 
+ * song and event:
+    * song schema (
+    id SERIAL NOT NULL PRIMARY KEY,
+    title VARCHAR(100),
+    artist VARCHAR(100),
+    album VARCHAR (255),
+    rating FLOAT(4),
+    genre VARCHAR(100),
+    lyrics TEXT,
+    image_url TEXT
+)
+* event schema : (
+    id SERIAL NOT NULL PRIMARY KEY,
+    event_url ,
+    venue VARCHAR(255),
+    title VARCHAR(255),
+    date VARCHAR(255),
+    image_url text,
+    description TEXT
+);
+
+
