@@ -1,0 +1,34 @@
+<%- include('../layout/head')%>
+
+    <body>
+
+        <% data.forEach(event=> { %>
+            <section class="displaySongs">
+
+                <h3>
+                    <%= event.event_url %>
+                </h3>
+                <h4>
+                    <%= event.venue %>
+                </h4>
+                <h3>
+                    <%= event.title %>
+                </h3>
+                <h4>
+                    <%= event.date %>
+                </h4>
+                <h3>
+                    <%= event.image_url %>
+                </h3>
+                <p>
+                    <%= event.description %>
+                </p>
+
+                <a class="style-button" id="showBook" href="/events/<%= event.id %>">Details</a>
+
+
+            </section>
+            <% }) %>
+    </body>
+
+    </html>
