@@ -9,6 +9,7 @@ const superAgent = require('superagent');
 // ........................................................................... CONFIGURATIONS
 const app = express();
 app.use(cors())
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -21,13 +22,24 @@ const client = new pg.Client(process.env.DATABASE_URL);
 //     connectionString: process.env.DATABASE_URL,
 //     ssl: { rejectUnauthorized: false }
 // });
+
 // .............................................................................. ROUTES
-app.get('/', handleHomePage)
+app.get('/', handleHomePage);
+
+app.get("/searches/songs", handleSongsSearches);
+
+
+
+
+
+app.get("*", handleError);
 
 // ............................................................................... FUNCTIONS
 function handleHomePage(req, res) {
     res.render('index');
 }
+
+function handleSongsSearches
 // .............................................................................. CONNECTION
 
 client.connect()
