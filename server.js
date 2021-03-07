@@ -6,6 +6,8 @@ const pg = require('pg');
 require('dotenv').config();
 const override = require('method-override');
 const superAgent = require('superagent');
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+const { json } = require('express');
 // ........................................................................... CONFIGURATIONS
 const app = express();
 app.use(cors())
@@ -22,16 +24,69 @@ const client = new pg.Client(process.env.DATABASE_URL);
 //     ssl: { rejectUnauthorized: false }
 // });
 // .............................................................................. ROUTES
-app.get('/', handleHomePage)
+app.get('/', handleHomePage);
+app.get('/events', handleEvents);
 
 // ............................................................................... FUNCTIONS
 function handleHomePage(req, res) {
     res.render('index');
 }
+
+app.get('/events', handleEvents);
+
+
+
+function handleEvents(req,res) {
+    let searchQuery = req.query.artist;
+  
+
+    let eventURL = 'https://rest.bandsintown.com/artists/'+ searchQuery +'/events';
+    let date = 'upcoming';
+
+    let query = {
+        app_id: process.env.app_id,
+        date: date
+       
+    }
+
+    superAgent.get(eventURL).query(query).then (data => {
+        let dataArray = data.body;
+        // console.log(dataArray);
+        if (dataArray.length === 0) {
+            let result= 'No upcoming events for now, search again later :)'
+            res.status(200).send(result);
+        } else {
+            dataArray.forEach((event) => {
+                if (event.length !== 0) {
+                    let eventObject = new EventConstructor(event.offers[0].url, event.offers[0].status, event.venue.country, event.venue.city, event.venue.name, event.venue.region, event.datetime, event.on_sale_datetime, event.description);
+                    res.status(200).send(eventObject);
+                }
+            });
+        }
+    }).catch(error=>{
+        console.log(error + "Error of superAgent");
+    })
+
+}
+// .............................................................................. CONSTRUCTOR
+
+function EventConstructor(offers, status, country, city, name, region, datetime, on_sale_datetime, description) {
+    this.offers = offers;
+    this.status = status;
+    this.country = country;
+    this.city = city;
+    this.name = name;
+    this.region = region;
+    this.datetime = datetime;
+    this.on_sale_datetime = on_sale_datetime;
+    this.description = description;
+
+}
+
+
 // .............................................................................. CONNECTION
 
 client.connect()
-    .then(() => {
-        app.listen(PORT, () => { console.log('app is running on http://localhost:' + PORT) })
-    })
-    .catch(error => console.log(error + ' error'));
+.then(() => {
+    app.listen(PORT, () => { console.log('app is running on' + PORT) })
+}) .catch(error => console.log(error + ' error'));
