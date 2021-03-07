@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3 id ="detailHeader">songs</h3>
+    <section>
+        <h3><%= data.title %> </h3>
+        <h4><%= data.artist %> </h4>
+        <h3><%= data.album  %> </h3>
+        <h4><%= data.rating %> </h4>
+        <h3><%= data.genre %> </h3>
+        <p><%= data.lyrics %> </p>
+        <form action="/deleteData/<%= data.id %>?_method=Delete" method="post" id="myForm">
+            <button id="delete"> Delete song</button>
+        </form>
+        </section>
+          > 
+</body>
+</html>
