@@ -1,5 +1,4 @@
 'use strict';
-// ............................................................................. IMPORTS
 const express = require('express');
 const cors = require('cors');
 const pg = require('pg');
@@ -22,9 +21,12 @@ const client = new pg.Client(process.env.DATABASE_URL);
 // const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
 
 // .............................................................................. ROUTES
-var arrayOfObject = [];
 
 app.get('/', handleHomePage);
+
+app.get("/songs", handleSongsSearches);
+app.get("/datasong", handlesongbage);
+
 app.get("/songs/:id", handleSong);
 app.get('/events', handleEvents);
 
@@ -51,12 +53,41 @@ function handleHomePage(req, res) {
     res.render('index')
 }
 
-
-
-
-
 var finalRes = []; 
 var result = ['No upcoming events for now, search again later :)']; 
+
+function handleSongsSearches(req, res) {
+
+    let {searchBy, formatInput} = req.query;
+
+    let query = {
+        apikey: process.env.SONG_API_KEY,
+        page_size: 10,
+        page: 1,
+        s_track_rating: "desc"
+    }
+
+    query[searchBy] = formatInput;
+
+    console.log(query);
+
+    let url = "http://api.musixmatch.com/ws/1.1/track.search";
+
+    superAgent.get(url).query(query)
+        .then(data => {
+            let songs = JSON.parse(data.text).message.body.track_list;
+            let arrayOfObject = []
+
+            songs.forEach(song => {
+                arrayOfObject.push(new Song(song.track));
+            })
+
+            res.render("pages/searches", {songSearches : arrayOfObject});
+        .catch(error => {
+            console.log('Error getting the data from song API, ', error);
+        })
+}
+
 function handleEvents(req, res) {
     let searchQuery = req.query.artist;
 
@@ -73,47 +104,6 @@ function handleEvents(req, res) {
 }
 
 // .............................................................................. data model
-function Song(song) {
-    console.log('The data passed to the construct', song);
-    let genre;
-
-    if (song.primary_genres.music_genre_list.length === 0) {
-        genre = "UNKNOWN";
-    } else {
-        genre = song.primary_genres.music_genre_list[0].music_genre.music_genre_name;
-    }
-
-    this.title = song.track_name;
-    this.artist = song.artist_name;
-    this.album = song.album_name;
-    this.rating = song.track_rating;
-    this.genre = genre;
-    this.lyrics = song.lyrics || "none";
-    this.image_url = song.image_url || "none";
-}
-
-
-
-// Don't touch ever
-// var testFunction = function (songs) {
-//     return new Promise((resolved, rejected) => {
-
-//         for (let i = 0; i < songs.length; i++) {
-//             const song = songs[i];
-//             lyricsData(song.track.artist_name, song.track.track_name).then(data => {
-             
-//                 song.track.lyrics = data;
-//                 arrayOfObject.push(new Song(song.track));
-//                 if (i === songs.length - 1) {
-//                     resolved(true);
-//                 }
-//             }).catch(error => {
-//                 console.log('Rejected called from testPromise', error);
-//                 rejected(false);
-//             });
-//         }
-//     })
-// }
 
 function handleEvent(req, res) {
     getDAtaForEvent().then(data => {
@@ -336,7 +326,24 @@ function EventConstructor(offers, status, country, city, name, region, datetime,
 
 };
 
+function Song(song) {
+    // console.log('The data passed to the construct', song);
+    let genre;
 
+    if (song.primary_genres.music_genre_list.length === 0) {
+        genre = "UNKNOWN";
+    } else {
+        genre = song.primary_genres.music_genre_list[0].music_genre.music_genre_name;
+    }
+
+    this.title = song.track_name;
+    this.artist = song.artist_name;
+    this.album = song.album_name;
+    this.rating = song.track_rating;
+    this.genre = genre;
+    this.lyrics = song.lyrics || "none";
+    this.image_url = song.image_url || "none";
+}
 
 
 
