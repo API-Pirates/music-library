@@ -1,33 +1,34 @@
 <%- include('../layout/head')%>
+    <%- include('../layout/navbar')%>
 
-    <body>
-        <h3 id="detailHeader">songs</h3>
-        <section>
-            <h3>
-                <%= data.event_url %>
-            </h3>
-            <h4>
-                <%= data.venue %>
-            </h4>
-            <h3>
-                <%= data.title %>
-            </h3>
-            <h4>
-                <%= data.date %>
-            </h4>
-            <h3>
-                <%= data.image_url %>
-            </h3>
-            <p>
-                <%= data.description %>
-            </p>
-            <form action="/deleteDataEvent/<%= data.id %>?_method=Delete" method="post" id="myForm">
-                <button id="delete"> Delete event</button>
-            </form>
-   
-        
-        </section>
-        
-    </body>
+        <body>
+            <h3 id="detailHeader">songs</h3>
+            <section>
+                <h3>
+                    <%= data.event_url %>
+                </h3>
+                <h4>
+                    <%= data.venue %>
+                </h4>
+                <h3>
+                    <%= data.title %>
+                </h3>
+                <h4>
+                    <%= data.date %>
+                </h4>
+                <h3>
+                    <%= data.image_url %>
+                </h3>
+                <p>
+                    <%= data.description %>
+                </p>
+                <form action="/deleteDataEvent/<%= data.id %>?_method=Delete" method="post" id="myForm">
+                    <button id="delete"> Delete event</button>
+                </form>
 
-    </html>
+
+            </section>
+
+        </body>
+
+        </html>

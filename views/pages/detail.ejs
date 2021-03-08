@@ -1,45 +1,46 @@
 <%- include('../layout/head')%>
+    <%- include('../layout/navbar')%>
 
-    <body>
-        <h3 id="detailHeader">songs</h3>
-        <section>
-            <h3>
-                <%= data.title %>
-            </h3>
-            <h4>
-                <%= data.artist %>
-            </h4>
-            <h3>
-                <%= data.album %>
-            </h3>
-            <h4>
-                <%= data.rating %>
-            </h4>
-            <h3>
-                <%= data.genre %>
-            </h3>
-            <p>
-                <%= data.lyrics %>
-            </p>
-            <form action="/deleteData/<%= data.id %>?_method=Delete" method="post" id="myForm">
-                <button id="delete"> Delete song</button>
-            </form>
+        <body>
+            <h3 id="detailHeader">songs</h3>
+            <section>
+                <h3>
+                    <%= data.title %>
+                </h3>
+                <h4>
+                    <%= data.artist %>
+                </h4>
+                <h3>
+                    <%= data.album %>
+                </h3>
+                <h4>
+                    <%= data.rating %>
+                </h4>
+                <h3>
+                    <%= data.genre %>
+                </h3>
+                <p>
+                    <%= data.lyrics %>
+                </p>
+                <form action="/deleteData/<%= data.id %>?_method=Delete" method="post" id="myForm">
+                    <button id="delete"> Delete song</button>
+                </form>
                 <section id="disypl">
                     <form action="/updateData/<%= data.id %>?_method=PUT" method="post" id=>
-                    <input type="text" name="title" value="<%= data.title %>"><br>
-                    <input type="text" name="artist" value="<%= data.artist  %>"><br>
-                    <input type="text" name="album" value="<%= data.album %>"><br>
-                    <input type="text" name="rating" value="<%=  data.rating %>"><br>
-                    <input type="text" name="genre" value="<%=  data.genre %>"><br>
+                        <input type="text" name="title" value="<%= data.title %>"><br>
+                        <input type="text" name="artist" value="<%= data.artist  %>"><br>
+                        <input type="text" name="album" value="<%= data.album %>"><br>
+                        <input type="text" name="rating" value="<%=  data.rating %>"><br>
+                        <input type="text" name="genre" value="<%=  data.genre %>"><br>
 
 
 
-                    <textarea name="description"  cols="52" rows="20"><%= data.lyrics %></textarea><br>
-                   
-                    <button type="submit" id="myupdateBu">update data</button>      
-                  
-            </form>
-        </section>
-    </body>
+                        <textarea name="description" cols="52" rows="20"><%= data.lyrics %></textarea><br>
 
-    </html>
+                        <button type="submit" id="myupdateBu">update data</button>
+
+                    </form>
+                </section>
+        </body>
+
+        </html>

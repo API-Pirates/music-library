@@ -26,9 +26,7 @@ const client = new pg.Client(process.env.DATABASE_URL);
 /*Home*/
 app.get('/', handleHomePage);
 
-
 app.get("/songs", handleSongsSearches);
-app.get("/datasong", handlesongbage);
 
 app.post('/songs/add', handleAddSong)
 
@@ -51,7 +49,7 @@ app.get("/datasong", handlesongpage);//list of all songs
 app.get("/songs/:id", handleSong);//view single song
 app.get("/searches/songs", handleSongsSearches);
 app.delete("/deleteData/:id", deletehandler);//delete one song
-app.put("/updateData/:id",handleupdateSong) // update data for one song 
+app.put("/updateData/:id", handleupdateSong) // update data for one song 
 
 // events
 app.get("/dataevent", handleEvent);//list all event
@@ -92,20 +90,6 @@ function handleAddSong(req, res) {
 
 function handleHomePage(req, res) {
     res.render('index')
-}
-
-
-
-
-function handleupdateEvent(req,res){
-
-    let formData = req.body;
-    console.log(formData);
-    let safeValues = [formData.venue, formData.title, formData.date, formData.description,req.params.id];
-   let mydata=`UPDATE event SET venue=$1,title=$2,date=$3,description=$4 WHERE id=$5;`
-    client.query(mydata,safeValues).then(()=>{
-        res.redirect(`/events/${req.params.id}`)
-    })
 }
 
 // var finalRes = []; 
@@ -172,15 +156,15 @@ function handleEvent(req, res) {
 
 function handleOneEvent(req, res) {
     getOneEvents(req.params.id).then(data => {
-        res.render('pages/detailEvent', { data:data })
+        res.render('pages/detailEvent', { data: data })
     })
 }
 
 function handleSong(req, res) {
     getOneSongs(req.params.id).then(data => {
-   console.log(data);
-        res.render('pages/detail', { data:data});
-   
+        console.log(data);
+        res.render('pages/detail', { data: data });
+
     })
 }
 
@@ -193,7 +177,7 @@ function getOneSongs(id) {
 
 function handlesongpage(req, res) {
     getdataFromDb().then(data => {
-        res.render('pages/datasong', { data: data});
+        res.render('pages/datasong', { data: data });
     });
 }
 
@@ -212,12 +196,12 @@ function deletehandler(req, res) {
         res.redirect("/datasong");
     });
 }
-function handleupdateSong(req,res){
+function handleupdateSong(req, res) {
     let formData = req.body;
     console.log(formData);
-    let safeValues = [formData.title, formData.artist, formData.album, formData.rating,formData.genre,req.params.id];
-   let mydata=`UPDATE song SET title=$1,artist=$2,album=$3,rating=$4,genre=$5 WHERE id=$6;`
-    client.query(mydata,safeValues).then(()=>{
+    let safeValues = [formData.title, formData.artist, formData.album, formData.rating, formData.genre, req.params.id];
+    let mydata = `UPDATE song SET title=$1,artist=$2,album=$3,rating=$4,genre=$5 WHERE id=$6;`
+    client.query(mydata, safeValues).then(() => {
         res.redirect(`/songs/${req.params.id}`)
     })
 }
@@ -273,7 +257,7 @@ function handleEvents(req, res) {
         var dataArray = data.body;
 
         if (dataArray.length === 0) {
-            // let result = 'No upcoming events for now, search again later :)'; 
+            let result = 'No upcoming events for now, search again later :)';
             finalRes = result;
 
             res.send("<h1> No upcoming events for now, search again later :) </h1>")
@@ -301,19 +285,20 @@ function handleEvents(req, res) {
                     // console.log(eventObject); 
                     finalRes.push(eventObject);
                     // console.log(finalRes); 
+                }
             });
-            res.render('eventResult' , {searchResults : finalRes}); 
+            res.render('eventResult', { searchResults: finalRes });
         }
 
         // res.status(200).send(finalRes);
         res.render('eventResult', { searchResults: finalRes });
-  
+
     }).catch(error => {
         console.log(error + "Error of superAgent");
     })
-//       .catch(error => {
-//         console.log(error + "Error of superAgent");
-//     })
+        .catch(error => {
+            console.log(error + " : Error of superAgent");
+        })
 
 }
 
