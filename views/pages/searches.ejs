@@ -1,0 +1,50 @@
+<%- include('../layout/head')%>
+
+  <body>
+    <form action="/songs" method="GET">
+      <input type="text" name="formatInput" id="song" placeholder="songs">
+      <input type="submit" value="Search">
+
+      <label for="singer">Artist</label>
+      <input type="radio" name="searchBy" value="q_artist" id="singer">
+      
+      <label for="track">Song</label>
+      <input type="radio" name="searchBy" value="q_track" id="track">
+      
+      <label for="lyrics">Lyrics</label>
+      <input type="radio" name="searchBy" value="q_lyrics" id="lyrics">
+  </form>
+
+  <% songSearches.forEach(song => { %>
+    <br>
+    <br>
+    <br>
+    <ul>
+      <li>
+        <div>
+          <img src="images/default song.jpg" alt="">
+        </div>
+        <div>
+          title: <%=song.title%>
+        </div>
+        <div>
+          Artist: <%=song.artist%>
+        </div>
+        <div>
+          Album name: <%=song.album%>
+        </div>
+        <div>
+          Rating: <%=song.rating%>
+        </div>
+        <div>
+          <button id="favorite">Add to favorite</button>
+        </div>
+      </li>
+    </ul>
+  <% })%>
+ 
+
+
+  </body>
+
+</html>

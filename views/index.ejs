@@ -1,27 +1,28 @@
 
-<!DOCTYPE html>
-<html lang="en">
+<%- include('./layout/head')%>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Library</title>
+    <body>
+        <h1>hello from server</h1>
+        <form action="/events" method="GET">
+            <input type="text" name="artist" id="artist">
+            <input type="submit" value="Search">
+            <!-- <button value= "submitEvent">Submit</button> -->
+        </form>
 
-    <link rel="stylesheet" href='style/base.css'>
-</head>
+        <form action="/songs" method="GET">
+            <input type="text" name="formatInput" id="song" placeholder="songs">
+            <input type="submit" value="Search">
 
-<body>
-    <h1>hello from server</h1>
-    <form action="/events" method="GET">
-        <input type="text" name="artist" id="artist">
-        <input type="submit" value="Search">
-        <!-- <button value= "submitEvent">Submit</button> -->
-    </form>
+            <label for="singer">Artist</label>
+            <input type="radio" name="searchBy" value="q_artist" id="singer">
+            
+            <label for="track">Song</label>
+            <input type="radio" name="searchBy" value="q_track" id="track">
+            
+            <label for="lyrics">Lyrics</label>
+            <input type="radio" name="searchBy" value="q_lyrics" id="lyrics">
+        </form>
+    </body>
 
-   
-
-</body>
-
-</html>
+    </html>
 
