@@ -28,10 +28,7 @@ app.get('/', handleHomePage);
 
 
 app.get("/songs", handleSongsSearches);
-app.get("/datasong", handlesongbage);
 
-app.get("/songs/:id", handleSong);
-app.get('/events', handleEvents);
 
 app.post('/saveEvent', saveToDB);
 app.get('/dataBaseEvents', handleDataBaseEvents);
@@ -40,9 +37,8 @@ app.get('/dataBaseEvents', handleDataBaseEvents);
 
 
 
-app.get("/events/:id", handleOneEvent);
-app.delete("/deleteData/:id", deletehandler);
-app.delete("/deleteDataEvent/:id", deletehandlerEvent);
+
+
 
 
 app.get('/about', handleAboutUs);
@@ -118,7 +114,9 @@ function handleSongsSearches(req, res) {
             })
 
             res.render("pages/searches", {songSearches : arrayOfObject});
-        .catch(error => {
+        
+        
+        }).catch(error => {
             console.log('Error getting the data from song API, ', error);
         })
 }
@@ -177,7 +175,7 @@ function deletehandlerEvent(req, res) {
     let sql = 'DELETE from event where id=$1'
     let value = [req.params.id];
     client.query(sql, value).then(() => {
-        res.redirect('/dataevent');
+        res.redirect('/dataBaseEvents');
     })
 }
 
@@ -224,12 +222,12 @@ function getDAtaForEvent() {
 
 }
 
-// function getdataFromDb() {
-//     let myData = "select * from song;"
-//     return client.query(myData).then(data => {
-//         return data.rows;
-//     })
-// }
+function getdataFromDb() {
+    let myData = "select * from song;"
+    return client.query(myData).then(data => {
+        return data.rows;
+    })
+}
 function handleEvents(req, res) {
     var finalRes = [];
     let searchQuery = req.query.artist;

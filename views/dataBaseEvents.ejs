@@ -47,6 +47,27 @@
             <!-- <button id="saveforLater" type="submit">Save for later</button> <br> -->
         
         </form>
+
+        <form action="/deleteDataEvent/<%= event.id %>?_method=Delete" method="post" id="myForm">
+            <button id="saveforLater" type="submit">Delete</button> <br>
+            <input type="hidden" name="offers" value="<%= event.offers %>"> <br>
+            <input type="hidden" name="status" value="<%= event.status %>"><br>
+            <input type="hidden" name="country" value="<%= event.country %>"><br>
+            <input type="hidden" name="city" value="<%= event.city %>"><br>
+            <input type="hidden" name="region" value="<%= event.region %>"><br>
+            <input type="hidden" name="namePlace" value="<%= event.namePlace %>"><br>
+            <input type="hidden" name="datetime" value="<%= event.datetime %>"><br>
+            <input type="hidden" name="on_sale_datetime" value="<%= event.on_sale_datetime %>"><br>
+            <input type="hidden" name=" description" value="<%= event.description %>"><br>
+            <input type="hidden" name="image_url" value="<%= event.thumb_url %>"">
+            <br>
+            <input type="hidden" name="artistName" value="<%= event.artistName %>"><br>
+            <input type="hidden" name="facebook_page_url" value="<%= event.facebook_page_url %>"><br>
+
+            
+        
+        </form>
+
     </diV>
         <%})%>
 </body>
