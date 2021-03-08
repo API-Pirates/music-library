@@ -24,6 +24,21 @@
             <form action="/deleteData/<%= data.id %>?_method=Delete" method="post" id="myForm">
                 <button id="delete"> Delete song</button>
             </form>
+                <section id="disypl">
+                    <form action="/updateData/<%= data.id %>?_method=PUT" method="post" id=>
+                    <input type="text" name="title" value="<%= data.title %>"><br>
+                    <input type="text" name="artist" value="<%= data.artist  %>"><br>
+                    <input type="text" name="album" value="<%= data.album %>"><br>
+                    <input type="text" name="rating" value="<%=  data.rating %>"><br>
+                    <input type="text" name="genre" value="<%=  data.genre %>"><br>
+
+
+
+                    <textarea name="description"  cols="52" rows="20"><%= data.lyrics %></textarea><br>
+                   
+                    <button type="submit" id="myupdateBu">update data</button>      
+                  
+            </form>
         </section>
     </body>
 
