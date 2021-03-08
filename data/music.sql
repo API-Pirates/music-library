@@ -7,7 +7,7 @@ CREATE TABLE song (
     title VARCHAR(100),
     artist VARCHAR(100),
     album VARCHAR (255),
-    rating FLOAT(4),
+    rating INT,
     genre VARCHAR(100),
     lyrics TEXT,
     image_url TEXT

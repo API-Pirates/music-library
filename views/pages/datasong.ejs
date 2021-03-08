@@ -1,0 +1,33 @@
+<%- include('../layout/head')%>
+
+    <body>
+
+        <% data.forEach(song=> { %>
+            <section class="displaySongs">
+
+                <h3>
+                    <%= song.title %>
+                </h3>
+                <h4>
+                    <%= song.artist %>
+                </h4>
+                <h3>
+                    <%= song.album %>
+                </h3>
+                <h4>
+                    <%= song.rating %>
+                </h4>
+                <h3>
+                    <%= song.genre %>
+                </h3>
+                <p>
+                    <%= song.lyrics %>
+                </p>
+
+                <a class="style-button" id="showBook" href="/songs/<%= song.id %>">Details</a>
+
+            </section>
+            <% }) %>
+    </body>
+
+    </html>
