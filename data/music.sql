@@ -16,9 +16,15 @@ CREATE TABLE song (
 CREATE TABLE event (
     id SERIAL NOT NULL PRIMARY KEY,
     event_url TEXT,
-    venue VARCHAR(255),
-    title VARCHAR(255),
+    status VARCHAR(255),
+    country VARCHAR(255),
+    city VARCHAR(255),
+    region VARCHAR(255),
+    name VARCHAR(255),
     date VARCHAR(255),
-    image_url text,
-    description TEXT
+    saleDate VARCHAR(255),
+    image_url TEXT,
+    description TEXT,
+    artistName VARCHAR(255),
+    facebook_page_url VARCHAR(255)
 );
