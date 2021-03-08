@@ -6,6 +6,7 @@ require('dotenv').config();
 const override = require('method-override');
 const superAgent = require('superagent');
 
+
 // ........................................................................... CONFIGURATIONS
 const app = express();
 app.use(cors());
@@ -22,7 +23,9 @@ const client = new pg.Client(process.env.DATABASE_URL);
 
 // .............................................................................. ROUTES
 
+/*Home*/
 app.get('/', handleHomePage);
+
 
 app.get("/songs", handleSongsSearches);
 app.get("/datasong", handlesongbage);
@@ -45,21 +48,53 @@ app.delete("/deleteDataEvent/:id", deletehandlerEvent);
 app.get('/about', handleAboutUs);
 app.get('/contact', handleContact);
 
-app.get("/dataevent", handleEvent);
 
+/*songs*/
+app.get("/datasong", handlesongpage);//list of all songs 
+app.get("/songs/:id", handleSong);//view single song
+app.get("/searches/songs", handleSongsSearches);
+app.delete("/deleteData/:id", deletehandler);//delete one song
+app.put("/updateData/:id",handleupdateSong) // update data for one song 
+
+
+// events
+app.get("/dataevent", handleEvent);//list all event
+app.get('/events', handleEvents);
+app.get("/events/:id", handleOneEvent);///view single event 
+app.delete("/deleteDataEvent/:id", deletehandlerEvent); // remove event
 app.get('*', handle404)
+
+
+
+
+
+
 // ............................................................................... Handlers
 function handleHomePage(req, res) {
     res.render('index')
 }
 
-var finalRes = []; 
-var result = ['No upcoming events for now, search again later :)']; 
+
+
+
+function handleupdateEvent(req,res){
+
+    let formData = req.body;
+    console.log(formData);
+    let safeValues = [formData.venue, formData.title, formData.date, formData.description,req.params.id];
+   let mydata=`UPDATE event SET venue=$1,title=$2,date=$3,description=$4 WHERE id=$5;`
+    client.query(mydata,safeValues).then(()=>{
+        res.redirect(`/events/${req.params.id}`)
+    })
+}
+
+// var finalRes = []; 
+// var result = ['No upcoming events for now, search again later :)']; 
+
 
 function handleSongsSearches(req, res) {
 
     let {searchBy, formatInput} = req.query;
-
     let query = {
         apikey: process.env.SONG_API_KEY,
         page_size: 10,
@@ -113,13 +148,15 @@ function handleEvent(req, res) {
 
 function handleOneEvent(req, res) {
     getOneEvents(req.params.id).then(data => {
-        res.render('pages/detailEvent', { data: data })
+        res.render('pages/detailEvent', { data:data })
     })
 }
 
 function handleSong(req, res) {
     getOneSongs(req.params.id).then(data => {
-        res.render('pages/detail', { data: data });
+   console.log(data);
+        res.render('pages/detail', { data:data});
+   
     })
 }
 
@@ -130,11 +167,17 @@ function getOneSongs(id) {
     })
 }
 
+function handlesongpage(req, res) {
+    getdataFromDb().then(data => {
+        res.render('pages/datasong', { data: data});
+    });
+}
+
 function deletehandlerEvent(req, res) {
     let sql = 'DELETE from event where id=$1'
     let value = [req.params.id];
     client.query(sql, value).then(() => {
-        res.redirect("pages/dataEvent");
+        res.redirect('/dataevent');
     })
 }
 
@@ -142,10 +185,18 @@ function deletehandler(req, res) {
     let sql = 'DELETE from song where id=$1'
     let value = [req.params.id];
     client.query(sql, value).then(() => {
-        res.redirect("pages/datasong");
+        res.redirect("/datasong");
     });
 }
-
+function handleupdateSong(req,res){
+    let formData = req.body;
+    console.log(formData);
+    let safeValues = [formData.title, formData.artist, formData.album, formData.rating,formData.genre,req.params.id];
+   let mydata=`UPDATE song SET title=$1,artist=$2,album=$3,rating=$4,genre=$5 WHERE id=$6;`
+    client.query(mydata,safeValues).then(()=>{
+        res.redirect(`/songs/${req.params.id}`)
+    })
+}
 
 function handleAboutUs(req, res) {
     res.render('pages/aboutUs')
@@ -180,7 +231,7 @@ function getDAtaForEvent() {
 //     })
 // }
 function handleEvents(req, res) {
-    finalRes = [];
+    var finalRes = [];
     let searchQuery = req.query.artist;
 
     let eventURL = 'https://rest.bandsintown.com/artists/' + searchQuery + '/events';
