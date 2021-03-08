@@ -7,13 +7,6 @@ require('dotenv').config();
 const override = require('method-override');
 const superAgent = require('superagent');
 
-// ........................................................................... CONFIGURATIONS
-const app = express();
-app.use(cors())
-app.use(express.urlencoded({ extended: true }));
-
-app.use(express.static('public'));
-app.set('view engine', 'ejs');
 
 
 // ........................................................................... CONFIGURATIONS
@@ -33,31 +26,56 @@ const client = new pg.Client(process.env.DATABASE_URL);
 // .............................................................................. ROUTES
 var arrayOfObject = [];
 
+/*Home*/
 app.get('/', handleHomePage);
-app.get("/searches/songs", handleSongsSearches);
-app.get("/datasong", handlesongbage);
-app.get("/songs/:id", handleSong);
-app.get('/events', handleEvents);
-app.get("/events/:id", handleOneEvent);
-app.delete("/deleteData/:id", deletehandler);
-app.delete("/deleteDataEvent/:id", deletehandlerEvent);
-
 app.get('/about', handleAboutUs);
 app.get('/contact', handleContact);
 
-app.get("/dataevent", handleEvent);
 
+/*songs*/
+app.get("/datasong", handlesongpage);//list of all songs 
+app.get("/songs/:id", handleSong);//view single song
+app.get("/searches/songs", handleSongsSearches);
+app.delete("/deleteData/:id", deletehandler);//delete one song
+app.put("/updateData/:id",handleupdateSong) // update data for one song 
+
+
+// events
+app.get("/dataevent", handleEvent);//list all event
+app.get('/events', handleEvents);
+app.get("/events/:id", handleOneEvent);///view single event 
+app.delete("/deleteDataEvent/:id", deletehandlerEvent); // remove event
 app.get('*', handle404)
+
+
+
+
+
+
 // ............................................................................... Handlers
 function handleHomePage(req, res) {
     res.render('index')
 }
 
+
+
+function handleupdateEvent(req,res){
+
+    let formData = req.body;
+    console.log(formData);
+    let safeValues = [formData.venue, formData.title, formData.date, formData.description,req.params.id];
+   let mydata=`UPDATE event SET venue=$1,title=$2,date=$3,description=$4 WHERE id=$5;`
+    client.query(mydata,safeValues).then(()=>{
+        res.redirect(`/events/${req.params.id}`)
+    })
+}
 function handleSongsSearches(req, res) {
 
     songsData(req.query.q, res);
 
 }
+
+
 
 function songsData(searchQuery, res) {
     let query = {
@@ -171,13 +189,15 @@ function handleEvent(req, res) {
 
 function handleOneEvent(req, res) {
     getOneEvents(req.params.id).then(data => {
-        res.render('pages/detailEvent', { data: data })
+        res.render('pages/detailEvent', { data:data })
     })
 }
 
 function handleSong(req, res) {
     getOneSongs(req.params.id).then(data => {
-        res.render('pages/detail', { data: data });
+   console.log(data);
+        res.render('pages/detail', { data:data});
+   
     })
 }
 
@@ -188,9 +208,9 @@ function getOneSongs(id) {
     })
 }
 
-function handlesongbage(req, res) {
+function handlesongpage(req, res) {
     getdataFromDb().then(data => {
-        res.render('pages/datasong', { data: data });
+        res.render('pages/datasong', { data: data});
     });
 }
 
@@ -198,7 +218,7 @@ function deletehandlerEvent(req, res) {
     let sql = 'DELETE from event where id=$1'
     let value = [req.params.id];
     client.query(sql, value).then(() => {
-        res.redirect("pages/dataEvent");
+        res.redirect('/dataevent');
     })
 }
 
@@ -206,10 +226,18 @@ function deletehandler(req, res) {
     let sql = 'DELETE from song where id=$1'
     let value = [req.params.id];
     client.query(sql, value).then(() => {
-        res.redirect("pages/datasong");
+        res.redirect("/datasong");
     });
 }
-
+function handleupdateSong(req,res){
+    let formData = req.body;
+    console.log(formData);
+    let safeValues = [formData.title, formData.artist, formData.album, formData.rating,formData.genre,req.params.id];
+   let mydata=`UPDATE song SET title=$1,artist=$2,album=$3,rating=$4,genre=$5 WHERE id=$6;`
+    client.query(mydata,safeValues).then(()=>{
+        res.redirect(`/songs/${req.params.id}`)
+    })
+}
 
 function handleAboutUs(req, res) {
     res.render('pages/aboutUs')
