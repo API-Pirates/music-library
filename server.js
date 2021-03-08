@@ -14,10 +14,9 @@ const app = express();
 app.use(cors());
 app.use(override('_method'));
 
-app.use(express.urlencoded({extended:true}))
-
-
-
+app.use(express.urlencoded({ extended: true }))
+app.set('view engine', 'ejs');
+app.use(express.static('public'))
 
 const PORT = process.env.PORT;
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -29,14 +28,12 @@ const client = new pg.Client(process.env.DATABASE_URL);
 app.get('/', handleHomePage);
 app.get("/songs", handleSongsSearches);
 app.get("/datasong", handlesongbage);
+app.post('/songs/add', handleAddSong)
 app.get("/songs/:id", handleSong);
 app.get('/events', handleEvents);
 
 app.post('/saveEvent', saveToDB);
 app.get('/dataBaseEvents', handleDataBaseEvents);
-
-
-
 
 
 app.get("/events/:id", handleOneEvent);
@@ -51,13 +48,42 @@ app.get("/dataevent", handleEvent);
 
 app.get('*', handle404)
 // ............................................................................... Handlers
+
+function handleAddSong(req, res) {
+    const { title, artist, album, rating, genre, image_url } = req.body
+
+    let lyricsQuery = {
+        apiaryApiKey: process.env.LYRICS_API_KEY
+    }
+
+    let url = `https://api.lyrics.ovh/v1/${artist}/${title}?`
+
+    superAgent.get(url).query(lyricsQuery)
+        .then(data => {
+            let lyrics = data.body.lyrics
+            let insertQuery = 'INSERT INTO song (title, artist, album, rating, genre, lyrics, image_url) VALUES ($1,$2,$3,$4,$5,$6,$7);';
+            let insertSafeValues = [
+                title, artist, album, rating, genre, lyrics, image_url
+            ];
+            client.query(insertQuery, insertSafeValues)
+                .then(() => {
+                    res.redirect('/datasong');
+                }).catch(error => {
+                    console.log('Error : ', error);
+                })
+        })
+        .catch(error => {
+            console.log('Error occurred while getting the lyrics', error);
+        })
+}
+
 function handleHomePage(req, res) {
     res.render('index')
 }
 
 function handleSongsSearches(req, res) {
 
-    let {searchBy, formatInput} = req.query;
+    let { searchBy, formatInput } = req.query;
 
     let query = {
         apikey: process.env.SONG_API_KEY,
@@ -68,7 +94,7 @@ function handleSongsSearches(req, res) {
 
     query[searchBy] = formatInput;
 
-    console.log(query);
+    // console.log(query);
 
     let url = "http://api.musixmatch.com/ws/1.1/track.search";
 
@@ -81,16 +107,17 @@ function handleSongsSearches(req, res) {
                 arrayOfObject.push(new Song(song.track));
             })
 
-            res.render("pages/searches", {songSearches : arrayOfObject});
+            res.render("pages/searches", { songSearches: arrayOfObject });
+        })
         .catch(error => {
             console.log('Error getting the data from song API, ', error);
         })
 }
 
 function handleEvents(req, res) {
-    var finalRes = []; 
+    var finalRes = [];
     let searchQuery = req.query.artist;
-    var result = ['No upcoming events for now, search again later :)']; 
+    var result = ['No upcoming events for now, search again later :)'];
 
     let eventURL = 'https://rest.bandsintown.com/artists/' + searchQuery + '/events';
 
@@ -173,19 +200,19 @@ function getOneEvents(id) {
 }
 
 function getDAtaForEvent() {
-    let myData = "select * from event;"
+    let myData = "SELECT * FROM event;"
     return client.query(myData).then(data => {
         return data.rows;
     })
-
 }
 
 function getdataFromDb() {
-    let myData = "select * from song;"
+    let myData = "SELECT * FROM song;"
     return client.query(myData).then(data => {
         return data.rows;
     })
 }
+
 function handleEvents(req, res) {
     let searchQuery = req.query.artist;
 
@@ -201,64 +228,47 @@ function handleEvents(req, res) {
     superAgent.get(eventURL).query(query).then(data => {
 
         var dataArray = data.body;
-        
+
         if (dataArray.length === 0) {
             // let result = 'No upcoming events for now, search again later :)'; 
-           finalRes= result; 
-      
-
+            finalRes = result;
 
         } else {
             let image;
             let artistName;
             let fbpage;
 
-            if(dataArray[0].artist){
-                    image = dataArray[0].artist.thumb_url;
-                    artistName = dataArray[0].artist.name;
-                    fbpage = dataArray[0].artist.facebook_page_url;
-            }      
+            if (dataArray[0].artist) {
+                image = dataArray[0].artist.thumb_url;
+                artistName = dataArray[0].artist.name;
+                fbpage = dataArray[0].artist.facebook_page_url;
+            }
 
             dataArray.forEach((event) => {
-                if (event.length !== 0 ) {
+                if (event.length !== 0) {
                     // image = dataArray[0].artist.thumb_url;
                     //         artistName = dataArray[0].artist.name;
                     //         fbpage = dataArray[0].artist.facebook_page_url;
-                    
-                    let eventObject = new EventConstructor(event.offers[0].url, event.offers[0].status, event.venue.country, event.venue.city, event.venue.name, event.venue.region, event.datetime, event.on_sale_datetime, event.description, artistName, image ,fbpage);
 
+                    let eventObject = new EventConstructor(event.offers[0].url, event.offers[0].status, event.venue.country, event.venue.city, event.venue.name, event.venue.region, event.datetime, event.on_sale_datetime, event.description, artistName, image, fbpage);
                     // console.log(eventObject); 
-                    finalRes.push(eventObject); 
+                    finalRes.push(eventObject);
                     // console.log(finalRes); 
                 }
             });
         }
 
         // res.status(200).send(finalRes);
-        res.render('eventResult' , {searchResults : finalRes}); 
-  
-    }).catch(error => {
-        console.log(error + "Error of superAgent");
-    })
-
-    
-}
+        res.render('eventResult', { searchResults: finalRes });
 
     }).catch(error => {
         console.log(error + "Error of superAgent");
     })
+
 }
 // ............................................................................... 
 //  database queries
-// let insertQuery = 'INSERT INTO song (title, artist, album, rating, genre, lyrics image_url) VALUES ();';
-// let insertSafeValues = [];
 
-// client.query(insertQuery, insertSafeValues)
-//     .then(data => {
-
-//     }).catch(error => {
-//         console.log('Error : ', error);
-//     })
 
 // // .............................
 // let selectQuery = 'SELECT * FROM song;';
@@ -291,39 +301,39 @@ function handleEvents(req, res) {
 // .............................................................................. CONSTRUCTOR
 
 
- function saveToDB(req, res){
-    var finalRes = []; 
+function saveToDB(req, res) {
+    var finalRes = [];
     var result = 'No upcoming events for now, search again later :)'
     let dataArray = req.body;
     // console.log(dataArray.description);
 
-     let InsertQuery = 'INSERT INTO event(event_url, status, country, city, region, name, date, saleDate, image_url, description, artistName, facebook_page_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 ,$12) RETURNING *;'; 
-     let safeValues = [dataArray.offers, dataArray.status, dataArray.country, dataArray.city, dataArray.region, dataArray.namePlace, dataArray.datetime, dataArray.on_sale_datetime,dataArray.image_url ,dataArray.description, dataArray.artistName, dataArray.facebook_page_url]; 
-     client.query(InsertQuery, safeValues).then((data)=>{
-         res.redirect('/dataBaseEvents');
-         console.log('added to the database'); 
-        
-     }).catch(error =>{
-         console.log('we have an error' + error); 
-     });
- }
+    let InsertQuery = 'INSERT INTO event(event_url, status, country, city, region, name, date, saleDate, image_url, description, artistName, facebook_page_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 ,$12) RETURNING *;';
+    let safeValues = [dataArray.offers, dataArray.status, dataArray.country, dataArray.city, dataArray.region, dataArray.namePlace, dataArray.datetime, dataArray.on_sale_datetime, dataArray.image_url, dataArray.description, dataArray.artistName, dataArray.facebook_page_url];
+    client.query(InsertQuery, safeValues).then((data) => {
+        res.redirect('/dataBaseEvents');
+        console.log('added to the database');
 
- function handleDataBaseEvents(req, res){
+    }).catch(error => {
+        console.log('we have an error' + error);
+    });
+}
 
-     let sql = `SELECT * FROM event`;
-     client.query(sql).then(data =>{
-         console.log(data.rows);
-         res.render('dataBaseEvents', {eventResults : data.rows});
+function handleDataBaseEvents(req, res) {
 
-     }).catch(error=>{
-         console.log('error on rendering events from DB', error); 
+    let sql = `SELECT * FROM event`;
+    client.query(sql).then(data => {
+        console.log(data.rows);
+        res.render('dataBaseEvents', { eventResults: data.rows });
 
-     });
- }
+    }).catch(error => {
+        console.log('error on rendering events from DB', error);
+
+    });
+}
 // ............................................................................... 
 
-function EventConstructor(offers, status, country, city, name, region, datetime, on_sale_datetime, description, artistName,thumb_url,facebook_page_url){
-    
+function EventConstructor(offers, status, country, city, name, region, datetime, on_sale_datetime, description, artistName, thumb_url, facebook_page_url) {
+
     this.offers = offers;
     this.status = status;
     this.country = country;
@@ -335,9 +345,9 @@ function EventConstructor(offers, status, country, city, name, region, datetime,
     this.description = description;
 
     this.artistName = artistName || 'unknown value';
-    this.thumb_url = thumb_url? thumb_url : "No Title Available";
+    this.thumb_url = thumb_url ? thumb_url : "No Title Available";
     this.facebook_page_url = facebook_page_url;
-    
+
 
 
 };
@@ -358,7 +368,7 @@ function Song(song) {
     this.rating = song.track_rating;
     this.genre = genre;
     this.lyrics = song.lyrics || "none";
-    this.image_url = song.image_url || "none";
+    this.image_url = song.image_url || "images/default song.jpg";
 }
 
 
@@ -401,7 +411,7 @@ function Song(song) {
 
 
 
-    client.connect()
+client.connect()
     .then(() => {
         app.listen(PORT, () => { console.log('app is running on' + PORT) })
     })
