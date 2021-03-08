@@ -1,5 +1,5 @@
 'use strict';
-// .......................................................................... IMPORTS
+// ............................................................................. IMPORTS
 const express = require('express');
 const cors = require('cors');
 const pg = require('pg');
@@ -9,22 +9,12 @@ const superAgent = require('superagent');
 
 // ........................................................................... CONFIGURATIONS
 const app = express();
-app.use(cors())
-app.use(express.urlencoded({ extended: true }));
-
-app.use(express.static('public'));
-app.set('view engine', 'ejs');
-
-
-// ........................................................................... CONFIGURATIONS
-const app = express();
 app.use(cors());
 app.use(override('_method'));
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.urlencoded({extended:true}))
-
-
-
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
 const PORT = process.env.PORT;
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -35,8 +25,6 @@ const client = new pg.Client(process.env.DATABASE_URL);
 var arrayOfObject = [];
 
 app.get('/', handleHomePage);
-app.get("/searches/songs", handleSongsSearches);
-app.get("/datasong", handlesongbage);
 app.get("/songs/:id", handleSong);
 app.get('/events', handleEvents);
 
@@ -63,71 +51,14 @@ function handleHomePage(req, res) {
     res.render('index')
 }
 
-function handleSongsSearches(req, res) {
-
-    songsData(req.query.q, res);
-
-}
-
-function songsData(searchQuery, res) {
-    let query = {
-        apikey: process.env.SONG_API_KEY,
-        q: searchQuery,
-        page_size: 10,
-        page: 1,
-        s_track_rating: "desc"
-    }
-
-    let url = "http://api.musixmatch.com/ws/1.1/track.search";
-
-    superAgent.get(url).query(query)
-        .then(data => {
-            let songs = JSON.parse(data.text).message.body.track_list;
-
-
-
-            testFunction(songs)
-                .then(data => {
-                    res.send(arrayOfObject);
-                })
-                .catch(error => {
-                    console.log('Error from the test function', error);
-                })
-            // songs.forEach(song => {
-            //     lyricsData(songs.artist_name, songs.track_name).then(data => {
-            //         console.log("Inside inner then");
-            //         song.lyrics = data;
-            //         arrayOfObject.push(new Song(song.track));
-            //     }).catch(error => {
-            //         console.log('Error from the lyricsData function', error);
-            //     });
-            // });
-            // console.log('Before res.send');
-            // res.send(arrayOfObject);
-        })
-        .catch(error => {
-            console.log('Error getting the data from song API, ', error);
-        })
-}
-
-
-function lyricsData(artist, song) {
-
-    console.log("artist", artist);
-    console.log("song", song);
-    let query = {
-        apiaryApiKey: process.env.LYRICS_API_KEY
-    }
-
-    let url = `https://api.lyrics.ovh/v1/${artist}/${song}`;
 
 
 
 
+var finalRes = []; 
+var result = ['No upcoming events for now, search again later :)']; 
 function handleEvents(req, res) {
-    var finalRes = []; 
     let searchQuery = req.query.artist;
-    var result = ['No upcoming events for now, search again later :)']; 
 
     let eventURL = 'https://rest.bandsintown.com/artists/' + searchQuery + '/events';
 
@@ -164,25 +95,25 @@ function Song(song) {
 
 
 // Don't touch ever
-var testFunction = function (songs) {
-    return new Promise((resolved, rejected) => {
+// var testFunction = function (songs) {
+//     return new Promise((resolved, rejected) => {
 
-        for (let i = 0; i < songs.length; i++) {
-            const song = songs[i];
-            lyricsData(song.track.artist_name, song.track.track_name).then(data => {
+//         for (let i = 0; i < songs.length; i++) {
+//             const song = songs[i];
+//             lyricsData(song.track.artist_name, song.track.track_name).then(data => {
              
-                song.track.lyrics = data;
-                arrayOfObject.push(new Song(song.track));
-                if (i === songs.length - 1) {
-                    resolved(true);
-                }
-            }).catch(error => {
-                console.log('Rejected called from testPromise', error);
-                rejected(false);
-            });
-        }
-    })
-}
+//                 song.track.lyrics = data;
+//                 arrayOfObject.push(new Song(song.track));
+//                 if (i === songs.length - 1) {
+//                     resolved(true);
+//                 }
+//             }).catch(error => {
+//                 console.log('Rejected called from testPromise', error);
+//                 rejected(false);
+//             });
+//         }
+//     })
+// }
 
 function handleEvent(req, res) {
     getDAtaForEvent().then(data => {
@@ -207,12 +138,6 @@ function getOneSongs(id) {
     return client.query(findBook, [id]).then(data => {
         return data.rows[0];
     })
-}
-
-function handlesongbage(req, res) {
-    getdataFromDb().then(data => {
-        res.render('pages/datasong', { data: data });
-    });
 }
 
 function deletehandlerEvent(req, res) {
@@ -258,13 +183,14 @@ function getDAtaForEvent() {
 
 }
 
-function getdataFromDb() {
-    let myData = "select * from song;"
-    return client.query(myData).then(data => {
-        return data.rows;
-    })
-}
+// function getdataFromDb() {
+//     let myData = "select * from song;"
+//     return client.query(myData).then(data => {
+//         return data.rows;
+//     })
+// }
 function handleEvents(req, res) {
+    finalRes = [];
     let searchQuery = req.query.artist;
 
     let eventURL = 'https://rest.bandsintown.com/artists/' + searchQuery + '/events';
@@ -282,10 +208,7 @@ function handleEvents(req, res) {
         
         if (dataArray.length === 0) {
             // let result = 'No upcoming events for now, search again later :)'; 
-           finalRes= result; 
-      
-
-
+            res.send("<h1> No upcoming events for now, search again later :) </h1>")
         } else {
             let image;
             let artistName;
@@ -298,7 +221,6 @@ function handleEvents(req, res) {
             }      
 
             dataArray.forEach((event) => {
-                if (event.length !== 0 ) {
                     // image = dataArray[0].artist.thumb_url;
                     //         artistName = dataArray[0].artist.name;
                     //         fbpage = dataArray[0].artist.facebook_page_url;
@@ -308,20 +230,14 @@ function handleEvents(req, res) {
                     // console.log(eventObject); 
                     finalRes.push(eventObject); 
                     // console.log(finalRes); 
-                }
             });
+            res.render('eventResult' , {searchResults : finalRes}); 
+
         }
 
-        // res.status(200).send(finalRes);
-        res.render('eventResult' , {searchResults : finalRes}); 
   
     }).catch(error => {
         console.log(error + "Error of superAgent");
-    })
-
-    
-}
-
     }).catch(error => {
         console.log(error + "Error of superAgent");
     })
@@ -370,8 +286,8 @@ function handleEvents(req, res) {
 
 
  function saveToDB(req, res){
-    var finalRes = []; 
-    var result = 'No upcoming events for now, search again later :)'
+    // var finalRes = []; 
+    // var result = 'No upcoming events for now, search again later :)'
     let dataArray = req.body;
     // console.log(dataArray.description);
 
@@ -458,13 +374,6 @@ function EventConstructor(offers, status, country, city, name, region, datetime,
 
 
 // .............................................................................. CONNECTION
-
-
-
-
-    client.connect()
-    .then(() => {
-        app.listen(PORT, () => { console.log('app is running on' + PORT) })
-    })
-    .catch(error => console.log(error + ' error'));
-
+client.connect().then(() => {
+    app.listen(PORT, () => { console.log('app is running on' + PORT) });
+}).catch(error => console.log(error + ' error'));
