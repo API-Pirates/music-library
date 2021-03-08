@@ -1,6 +1,4 @@
 'use strict';
-
-// .......................................................................... IMPORTS
 const express = require('express');
 const cors = require('cors');
 const pg = require('pg');
@@ -8,16 +6,14 @@ require('dotenv').config();
 const override = require('method-override');
 const superAgent = require('superagent');
 
-
 // ........................................................................... CONFIGURATIONS
 const app = express();
 app.use(cors());
 app.use(override('_method'));
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.urlencoded({extended:true}))
-
-
-
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
 const PORT = process.env.PORT;
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -27,8 +23,10 @@ const client = new pg.Client(process.env.DATABASE_URL);
 // .............................................................................. ROUTES
 
 app.get('/', handleHomePage);
+
 app.get("/songs", handleSongsSearches);
 app.get("/datasong", handlesongbage);
+
 app.get("/songs/:id", handleSong);
 app.get('/events', handleEvents);
 
@@ -54,6 +52,9 @@ app.get('*', handle404)
 function handleHomePage(req, res) {
     res.render('index')
 }
+
+var finalRes = []; 
+var result = ['No upcoming events for now, search again later :)']; 
 
 function handleSongsSearches(req, res) {
 
@@ -88,9 +89,7 @@ function handleSongsSearches(req, res) {
 }
 
 function handleEvents(req, res) {
-    var finalRes = []; 
     let searchQuery = req.query.artist;
-    var result = ['No upcoming events for now, search again later :)']; 
 
     let eventURL = 'https://rest.bandsintown.com/artists/' + searchQuery + '/events';
 
@@ -129,12 +128,6 @@ function getOneSongs(id) {
     return client.query(findBook, [id]).then(data => {
         return data.rows[0];
     })
-}
-
-function handlesongbage(req, res) {
-    getdataFromDb().then(data => {
-        res.render('pages/datasong', { data: data });
-    });
 }
 
 function deletehandlerEvent(req, res) {
@@ -180,13 +173,14 @@ function getDAtaForEvent() {
 
 }
 
-function getdataFromDb() {
-    let myData = "select * from song;"
-    return client.query(myData).then(data => {
-        return data.rows;
-    })
-}
+// function getdataFromDb() {
+//     let myData = "select * from song;"
+//     return client.query(myData).then(data => {
+//         return data.rows;
+//     })
+// }
 function handleEvents(req, res) {
+    finalRes = [];
     let searchQuery = req.query.artist;
 
     let eventURL = 'https://rest.bandsintown.com/artists/' + searchQuery + '/events';
@@ -204,10 +198,7 @@ function handleEvents(req, res) {
         
         if (dataArray.length === 0) {
             // let result = 'No upcoming events for now, search again later :)'; 
-           finalRes= result; 
-      
-
-
+            res.send("<h1> No upcoming events for now, search again later :) </h1>")
         } else {
             let image;
             let artistName;
@@ -220,7 +211,6 @@ function handleEvents(req, res) {
             }      
 
             dataArray.forEach((event) => {
-                if (event.length !== 0 ) {
                     // image = dataArray[0].artist.thumb_url;
                     //         artistName = dataArray[0].artist.name;
                     //         fbpage = dataArray[0].artist.facebook_page_url;
@@ -230,20 +220,14 @@ function handleEvents(req, res) {
                     // console.log(eventObject); 
                     finalRes.push(eventObject); 
                     // console.log(finalRes); 
-                }
             });
+            res.render('eventResult' , {searchResults : finalRes}); 
+
         }
 
-        // res.status(200).send(finalRes);
-        res.render('eventResult' , {searchResults : finalRes}); 
   
     }).catch(error => {
         console.log(error + "Error of superAgent");
-    })
-
-    
-}
-
     }).catch(error => {
         console.log(error + "Error of superAgent");
     })
@@ -292,8 +276,8 @@ function handleEvents(req, res) {
 
 
  function saveToDB(req, res){
-    var finalRes = []; 
-    var result = 'No upcoming events for now, search again later :)'
+    // var finalRes = []; 
+    // var result = 'No upcoming events for now, search again later :)'
     let dataArray = req.body;
     // console.log(dataArray.description);
 
@@ -397,13 +381,6 @@ function Song(song) {
 
 
 // .............................................................................. CONNECTION
-
-
-
-
-    client.connect()
-    .then(() => {
-        app.listen(PORT, () => { console.log('app is running on' + PORT) })
-    })
-    .catch(error => console.log(error + ' error'));
-
+client.connect().then(() => {
+    app.listen(PORT, () => { console.log('app is running on' + PORT) });
+}).catch(error => console.log(error + ' error'));
