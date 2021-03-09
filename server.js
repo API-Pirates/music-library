@@ -1,10 +1,13 @@
 'use strict';
+
+const youtubeUrl="https://youtube.googleapis.com/youtube/v3/search?q=sia unstoppable&key=AIzaSyBgNqjdZgwATQEtTx8ZXCrW9eZDt8pSUmg&type=video"
 const express = require('express');
 const cors = require('cors');
 const pg = require('pg');
 require('dotenv').config();
 const override = require('method-override');
 const superAgent = require('superagent');
+var arrayOfObject = []
 
 // ........................................................................... CONFIGURATIONS
 const app = express();
@@ -108,23 +111,84 @@ function handleSongsSearches(req, res) {
 
     // console.log(query);
 
+
+    arrayOfObject=[];
+
     let url = "http://api.musixmatch.com/ws/1.1/track.search";
 
     superAgent.get(url).query(query)
         .then(data => {
             let songs = JSON.parse(data.text).message.body.track_list;
-            let arrayOfObject = []
-
-            songs.forEach(song => {
-                arrayOfObject.push(new Song(song.track));
+            
+            testFunction(songs)
+            .then(data => {
+            
+            console.log(arrayOfObject)
+                res.render("pages/searches", { songSearches: arrayOfObject });
+            
+                // res.send(arrayOfObject);
+            })
+            .catch(error => {
+                console.log('Error from the test function', error);
             })
 
+
             res.render("pages/searches", { songSearches: arrayOfObject });
+
         })
         .catch(error => {
             console.log('Error getting the data from song API, ', error);
         })
 }
+
+
+
+function youtubeData(artist,song) {
+let mySearch=`${artist} ${song}`
+    // console.log("artist", artist);
+    // console.log("song", song);
+    let query = {
+        q:mySearch,
+        key:process.env.YOUTUBE_KEY,
+        type:"video",
+        maxResults:1
+    }
+    // https://youtube.googleapis.com/youtube/v3/search?q=sia unstoppable&key=AIzaSyBgNqjdZgwATQEtTx8ZXCrW9eZDt8pSUmg&type=video
+
+    let url = `https://youtube.googleapis.com/youtube/v3/search`;
+
+     return superAgent.get(url).query(query)
+        .then(data => {
+
+            // console.log(JSON.parse(data.text).items[0].id.videoId);
+             return JSON.parse(data.text).items[0].id.videoId;
+        })
+        .catch(error => {
+            console.log('Error occurred while getting the lyrics', error);
+        })
+}
+
+var testFunction = function (songs) {
+    return new Promise((resolved, rejected) => {
+
+        for (let i = 0; i < songs.length; i++) {
+            const song = songs[i];
+            youtubeData(song.track.artist_name, song.track.track_name).then(data => {
+             
+                song.track.youtube = data;
+                
+                arrayOfObject.push(new Song(song.track));
+                if (i === songs.length - 1) {
+                    resolved(true);
+                }
+            }).catch(error => {
+                console.log('Rejected called from testPromise', error);
+                rejected(false);
+            });
+        }
+    })
+}
+
 
 function handleEvents(req, res) {
     var finalRes = [];
@@ -413,6 +477,7 @@ function Song(song) {
     this.album = song.album_name;
     this.rating = song.track_rating;
     this.genre = genre;
+    this.youtube=song.youtube;
     this.lyrics = song.lyrics || "none";
     this.image_url = song.image_url || "images/default song.jpg";
 }
