@@ -150,6 +150,7 @@ function handleSongsSearches(req, res) {
                 console.log('Error from the test function', error);
             })
 
+
             
             // songs.forEach(song => {
             //     arrayOfObject.push(new Song(song.track));
