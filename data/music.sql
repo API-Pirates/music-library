@@ -27,6 +27,4 @@ CREATE TABLE event (
     description TEXT,
     artistName VARCHAR(255),
     facebook_page_url VARCHAR(255)
-
 );
-
