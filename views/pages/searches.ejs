@@ -1,23 +1,26 @@
 <%- include('../layout/head')%>
+  <%- include('../layout/navbar')%>
 
+    <body>
+        <div id='search-song' class="login-box layout-container ">
+          <form action="/songs" method="GET">
+              <div class="user-box">
+                  <input type="text" name="formatInput" id="song" placeholder="songs">
 
-  <body>
-    <form action="/songs" method="GET">
-      <input type="text" name="formatInput" id="song" placeholder="songs">
-      <input type="submit" value="Search">
+                  <label class="search-song-label" for=" singer">Artist</label>
+                  <input type="radio" name="searchBy" value="q_artist" id="singer">
 
-      <label for="singer">Artist</label>
-      <input type="radio" name="searchBy" value="q_artist" id="singer">
-
-      <label for="track">Song</label>
-      <input type="radio" name="searchBy" value="q_track" id="track">
-
-      <label for="lyrics">Lyrics</label>
-      <input type="radio" name="searchBy" value="q_lyrics" id="lyrics">
-    </form>
-
-
-
+                  <label class="search-song-label" for="track">Song</label>
+                  <input type="radio" name="searchBy" value="q_track" id="track">
+                  
+                  <label class="search-song-label" for=" lyrics">Lyrics</label>
+                  <input type="radio" name="searchBy" value="q_lyrics" id="lyrics">
+              </div>
+              <a href="" style="position: relative;">
+                  <input type="submit" value="Search">
+              </a>
+          </form>
+      </div>
 
     <% songSearches.forEach(song=> { %>
       <div class="container1">
@@ -52,9 +55,9 @@
         </div>
       </div>
       <% })%>
+                  
+      <%- include('../layout/footer') %>
+                  
+    </body>
 
-
-
-  </body>
-
-  </html>
+    </html>

@@ -2,21 +2,42 @@
     <%- include('../layout/navbar')%>
 
         <body>
-            <header>
-                <h1>Contact Us</h1>
+            <header class="header">
+                <div class="layout-container">
+                    <h1>Contact Us</h1>
+                </div>
             </header>
 
             <main>
-                <form action="">
-                    <label for=""> Name:</label>
-                    <input type="text" placeholder="Enter Your Name" name="name">
-                    <label for="email"> Email: </label>
-                    <input type="text" placeholder="Enter Your Email" name="email">
-                    <label for="message"> message: </label>
-                    <textarea name="message" id="message" cols="40" rows="15"></textarea>
-                    <button> <a href="mailto:example@gmail.com"> Send</a> </button>
-                </form>
+                <div class="main">
+                    <div class="bio"><img class="profile-img" src="images/logo.png"/>
+                      <h3 class="header">MUSICALLY</h3>
+                      <span>“Music is life itself.”</span>
+                      <p> We believe that songs can help throughout anything, Please free to contact us any time.</p><a class="bio-link" href="#">Twitter<i class="fa fa-twitter"></i></a><a class="bio-link" href="#">Github<i class="fa fa-github"></i></a>
+                    </div>
+                    <div class="contact">
+                      <form id="form">
+                        <legend class="header">We would love to hear your feedback  <i class="fas fa-headphones-alt"></i></legend>
+                        <fieldset>
+                          <label class="fa fa-user" for="name-input" aria-hidden="true"></label>
+                          <input id="name-input" type="text" placeholder="Your name..."/>
+                        </fieldset>
+                        <fieldset>
+                          <label class="fa fa-envelope" for="email-input" aria-hidden="true"></label>
+                          <input id="email-input" type="email" placeholder="Your email..."/>
+                        </fieldset>
+                        <fieldset>
+                          <label class="fa fa-comment" for="message-input" aria-hidden="true"></label>
+                          <textarea id="message-input" placeholder="Your Message..."></textarea>
+                        </fieldset>
+                        <fieldset>
+                          <button id="btn-submit" type="submit">Send</button>
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
             </main>
+            <%- include('../layout/footer') %>
         </body>
 
         </html>
