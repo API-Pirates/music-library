@@ -3,6 +3,7 @@
 @import 'modules.css';
 @import 'themes.css';
 
+ /* .................................................... tags */
 * {
 	list-style-type: none;
   box-sizing: border-box;
@@ -20,10 +21,14 @@ a{
     color:#fff;
     text-decoration: none;
 }
-
+a:hover{
+  color:#17223b;
+  text-decoration: none;
+}
 .header{
   text-align: center;
 }
+/* .................................................... headings  */
 h1,h2,h3,h4,h5,h6{ 
   font-weight: 400;
 }
@@ -51,17 +56,7 @@ p{
   line-height: 1.5;
 }
 
-footer{
-  padding:  3% 0 ;
-  text-align: center;
-  word-spacing: 5px;
-}
-footer p {
-  font-size: 1.5em;
-  font-weight: 500;
-}
-
-
+/* .................................................. navbar */
 nav ul{
 	display: flex;
 	margin: auto;
@@ -77,6 +72,16 @@ nav ul li {
 	margin: auto;
 }
 
+/*  .................. ............................ footer */
+footer{
+  padding:  3% 0 ;
+  text-align: center;
+  word-spacing: 5px;
+}
+footer p {
+  font-size: 1.5em;
+  font-weight: 500;
+}
 /* nav ul li:hover {
   background-image: url('https://scottyzen.sirv.com/Images/v/button.png');
   background-size: 100% 100%;
@@ -88,8 +93,21 @@ nav ul li {
 nav ul li:active {
   transform: translateY(4px);
 } */
+/* ............................ color palette */
+ .color1{
+   background-color: #17223b;
+ }
+ .color1{
+  background-color: #263859;
+}
+.color1{
+  background-color: #6b778d;
+}
+.color1{
+  background-color: #ff6768;
+}
 /* ................................................... */
-@keyframes spring {
+/* @keyframes spring {
   15% {
     -webkit-transform-origin: center center;
     -webkit-transform: scale(1.2, 1.1);
@@ -106,7 +124,7 @@ nav ul li:active {
     -webkit-transform-origin: center center;
     -webkit-transform: scale(1, 1);
   }
-}
+} */
 
  /* mobile view styles .................................................  */
 @media( max-width:700px){
@@ -131,3 +149,9 @@ nav ul li:active {
   h6{
     font-size: 0.9em;
   }
+
+  /* DetailsSong********************** */
+  
+/* .updateSongs223 {
+  display: none;
+} */
