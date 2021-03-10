@@ -388,7 +388,7 @@ function EventConstructor(offers, status, country, city, name, region, datetime,
 
     this.offers = offers;
     this.status = status;
-    this.country = country;
+    this.country = country? country: 'USA';
     this.city = city;
     this.namePlace = name;
     this.region = region;
