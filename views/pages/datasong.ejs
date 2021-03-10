@@ -3,17 +3,48 @@
 
         <body>
             <% data.forEach(song=> { %>
-                <section class="displaySongs">
-                    <img src='<%= song.image_url%>' alt="">
-                    <h3>
-                        <%= song.title %>
-                    </h3>
-                    <h4>
-                        <%= song.artist %>
-                    </h4>
-                    <a class="style-button" id="showBook" href="/songs/<%= song.id %>">Details</a>
-                </section>
+                
+
+                <div class="container">
+                    <div class="cards">
+                        <a class="card" href="#" style="background: #17223b; color:white;">
+                            <span class="card-header"><img src='<%= song.image_url%>' alt="">
+                            <span class="card-title">
+                                <h3> <%= song.title %></h3>
+                            </span>
+                        </span>
+                        
+                        <span class="card-summary">
+                            <%= song.artist %>
+                        </span>
+                        <span class="card-meta">
+                            <form action="/songs/<%= song.id %>">
+                                <button class="style-button" id="showBook" style="color: black;">Details</button>
+
+                            </form>
+                            <!-- <a ></a> -->
+                        </span>
+                    </a>
+                </div>
+                </div>
                 <% }) %>
         </body>
 
-        </html>
+        <!-- </html>
+        <div class="container">
+            <div class="cards">
+                <a class="card" href="#">
+                    <span class="card-header" style="background-image: url(http://placeimg.com/400/200/animals);">
+                        <span class="card-title">
+                            <h3>This is a title for a card</h3>
+                        </span>
+                    </span>
+                    <span class="card-summary">
+                        A summary will also be present. Usually two to three brief sentences about the content on the detail page.
+                    </span>
+                    <span class="card-meta">
+                        Published: June 18th, 2015
+                    </span>
+                </a>
+         -->
+                

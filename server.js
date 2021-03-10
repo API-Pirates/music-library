@@ -19,9 +19,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'))
 
 const PORT = process.env.PORT;
-// const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URL);
 
-const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
+// const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
 
 // .............................................................................. ROUTES
 
@@ -166,6 +166,32 @@ let mySearch=`${artist} ${song}`
         .catch(error => {
             console.log('Error occurred while getting the lyrics', error);
         })
+}
+function saveToDB(req, res) {
+    var finalRes = [];
+    var result = 'No upcoming events for now, search again later :)'
+    let dataArray = req.body;
+    // console.log(dataArray.description);
+
+    let InsertQuery = 'INSERT INTO event(event_url, status, country, city, region, name, date, saleDate, image_url, description, artistName, facebook_page_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 ,$12) RETURNING *;';
+    let safeValues = [dataArray.offers, dataArray.status, dataArray.country, dataArray.city, dataArray.region, dataArray.namePlace, dataArray.datetime, dataArray.on_sale_datetime, dataArray.image_url, dataArray.description, dataArray.artistName, dataArray.facebook_page_url];
+    client.query(InsertQuery, safeValues).then((data) => {
+        res.redirect('/dataBaseEvents');
+        console.log('added to the database');
+
+    }).catch(error => {
+        console.log('we have an error' + error);
+    });
+}
+
+function handleDataBaseEvents(req, res) {
+    let sql = `SELECT * FROM event`;
+    client.query(sql).then(data => {
+        console.log(data.rows);
+        res.render('dataBaseEvents', { eventResults: data.rows });
+    }).catch(error => {
+        console.log('error on rendering events from DB', error);
+    });
 }
 
 var testFunction = function (songs) {
@@ -489,4 +515,3 @@ client.connect()
         app.listen(PORT, () => { console.log('app is running on' + PORT) })
     })
     .catch(error => console.log(error + ' error'));
-
