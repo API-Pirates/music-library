@@ -19,13 +19,16 @@
     background-repeat: no-repeat;
     background-size: 100%;
     animation-name :slide-bg;
-    animation-duration: 9s;
+    animation-duration: 20s;
     animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
 @keyframes slide-bg{
     0%   {background-image: url('../images/bg1.jpg');}
-  50%  {background-image: url('../images/bg2.jpg');}
-  100% {background-image: url('../images/bg3.jpg');}
+    20% {background-image: url('../images/bg5.jpeg');}
+    40% {background-image: url('../images/bg3.jpg');}
+    60%  {background-image: url('../images/bg2.jpg');}
+    80% {background-image: url('../images/bg4.jpeg');}
 }
 .forms-hide {
     display: none;
@@ -62,17 +65,17 @@
     cursor: pointer;
     transition: 0.5s;
 }
-.toggle-button:hover:{
+.toggle-button:hover{
     transform: scale(1.2);
 }
 /* ..... ...... top 5 songs section styles */
   .grid-container{
       margin-top:  5%;
-     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-     width: 100%;
-   padding: 0 5%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      width: 100%;
+      padding: 0 5%;
   }
  .grid-item{
      flex : 30%;
@@ -86,20 +89,36 @@
    }
 
    /* ....................... events remainder */
+   #home-events{
+       background-image: url('../images/bg5.jpeg');
+       background-repeat: no-repeat;
+       background-size: 100%;
+       background-attachment: fixed;
+       padding: 5% 0;
+   }
+   #home-events h2{
+    margin-bottom: 4%;
+}
    #home-events article{
     text-align: left;
     margin-top: 10%;
-    padding: 0 0 0 15%;
+    position: relative;
+    width: 40%;
+    margin: 5% auto;
+    box-shadow: 1px 10px 18px #000;
    } 
    #home-events img{
-    width:50%
+    width:100%;
     vertical-align:top;
    } 
    #home-events article figcaption{
        display: inline-block;
-       width: 60%;
+       width: 100%;
        vertical-align:top;
+       background-color: #ff6768;
+       padding: 5% 2%;
    }
+
    #home-events article figcaption h5{
      line-height: 1.5;
    }
@@ -131,8 +150,6 @@
    /* ............ carousel homepage */ 
   .mySlides {display:none;}
  
-  
-/* .................................................................. END OF HOMEPAGE */
  /* .......................................... mobile view styles  */
  @media( max-width:700px){
     .grid-item{
@@ -141,10 +158,26 @@
     .grid-item article{
         flex: 100%;
    }
+   
+      #home-events article{
+    width: 90%;
+   } 
+   
+   #home-events article h5{
+    font-size: 1em;
+   } 
   }
-
-
-
+/* .................................................................. END OF HOMEPAGE */
+/* .................................................................... saved events page */
+.events-flex{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.events-flex form{
+   width: fit-content;
+}
 
   /* ======================= START ABOUT US PAGE ================= */
 
@@ -347,7 +380,7 @@
   h1 {
     text-align: center;
   }
-  
+   
   /* ===================END about us page======================= */
 
 /* ======================Contact us page======================== */
