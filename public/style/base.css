@@ -4,26 +4,67 @@
 @import 'themes.css';
 
 * {
-	margin: 0;
-	padding: 0;
 	list-style-type: none;
+  box-sizing: border-box;
 }
-body{
-	background: #1E1F25;
+
+body {
+  color:#fff;
+  font-family: sans-serif;
+  background: linear-gradient(#1E1F25, #243b55);
+  text-align: center;
+  width: 100%;
 }
 
 a{
     color:#fff;
     text-decoration: none;
 }
-.layout-container{
-    padding: 4% 1%;
+
+.header{
+  text-align: center;
 }
+h1,h2,h3,h4,h5,h6{ 
+  font-weight: 400;
+}
+
+h1{
+  font-size: 2.5em;
+  font-weight: 600;
+}
+h2{
+  font-size: 1.8em;
+}
+
+h3{
+  font-size: 1.6em;
+}
+h4{
+  font-size: 1.4em;
+}
+h5{
+  font-size: 1.1em;
+}
+
+p{
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+footer{
+  padding:  3% 0 ;
+  text-align: center;
+  word-spacing: 5px;
+}
+footer p {
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+
 nav ul{
 	display: flex;
-	width: 100%;
 	margin: auto;
-	max-width: 1000px;
 	justify-content: space-between;
 	text-align: center;
 }
@@ -36,18 +77,18 @@ nav ul li {
 	margin: auto;
 }
 
-nav ul li:hover {
+/* nav ul li:hover {
   background-image: url('https://scottyzen.sirv.com/Images/v/button.png');
   background-size: 100% 100%;
   color: #27262c;
   animation: spring 300ms ease-out;
-  text-shadow: 0 -1px 0 #ef816c;
+  text-shadow: 0 -1px 0 pink;
 	font-weight: bold;
 }
 nav ul li:active {
   transform: translateY(4px);
-}
-
+} */
+/* ................................................... */
 @keyframes spring {
   15% {
     -webkit-transform-origin: center center;
@@ -66,3 +107,29 @@ nav ul li:active {
     -webkit-transform: scale(1, 1);
   }
 }
+
+ /* mobile view styles .................................................  */
+@media( max-width:700px){
+
+  h1{
+    font-size: 1.5em;
+  }
+  h2{
+    font-size: 1.3em;
+  }
+  h3{
+    font-size: 1.2em;
+  }
+  h4{
+    font-size: 1.1em;
+  }
+}
+  h5{
+    font-size: 1em;
+  }
+
+  h6{
+    font-size: 0.9em;
+  }
+}
+

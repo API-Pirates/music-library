@@ -88,13 +88,24 @@ function handleAddSong(req, res) {
         })
 }
 
+
 function handleHomePage(req, res) {
-    res.render('index')
+
+    let topRated = [];
+    let randomEvents = []
+    let ratingQuery = 'SELECT title, rating, image_url, artist FROM song ORDER BY rating DESC LIMIT 5;';
+
+    let eventsQuery = 'SELECT * FROM event LIMIT 3;';
+
+    client.query(ratingQuery).then(data => {
+        topRated = data.rows;
+
+        client.query(eventsQuery).then(data => {
+            randomEvents = data.rows;
+            res.render('index', { events: randomEvents, ratedSongs: topRated })
+        });
+    })
 }
-
-// var finalRes = []; 
-// var result = ['No upcoming events for now, search again later :)']; 
-
 
 function handleSongsSearches(req, res) {
 
@@ -109,8 +120,8 @@ function handleSongsSearches(req, res) {
 
     query[searchBy] = formatInput;
 
-    // console.log(query);
 
+    // console.log(query);
 
     arrayOfObject=[];
 
@@ -157,6 +168,32 @@ let mySearch=`${artist} ${song}`
         .catch(error => {
             console.log('Error occurred while getting the lyrics', error);
         })
+}
+function saveToDB(req, res) {
+    var finalRes = [];
+    var result = 'No upcoming events for now, search again later :)'
+    let dataArray = req.body;
+    // console.log(dataArray.description);
+
+    let InsertQuery = 'INSERT INTO event(event_url, status, country, city, region, name, date, saleDate, image_url, description, artistName, facebook_page_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 ,$12) RETURNING *;';
+    let safeValues = [dataArray.offers, dataArray.status, dataArray.country, dataArray.city, dataArray.region, dataArray.namePlace, dataArray.datetime, dataArray.on_sale_datetime, dataArray.image_url, dataArray.description, dataArray.artistName, dataArray.facebook_page_url];
+    client.query(InsertQuery, safeValues).then((data) => {
+        res.redirect('/dataBaseEvents');
+        console.log('added to the database');
+
+    }).catch(error => {
+        console.log('we have an error' + error);
+    });
+}
+
+function handleDataBaseEvents(req, res) {
+    let sql = `SELECT * FROM event`;
+    client.query(sql).then(data => {
+        console.log(data.rows);
+        res.render('dataBaseEvents', { eventResults: data.rows });
+    }).catch(error => {
+        console.log('error on rendering events from DB', error);
+    });
 }
 
 var testFunction = function (songs) {
@@ -273,68 +310,6 @@ function getdataFromDb() {
     })
 }
 
-// function handleEvents(req, res) {
-//     var finalRes = [];
-//     let searchQuery = req.query.artist;
-
-//     let eventURL = 'https://rest.bandsintown.com/artists/' + searchQuery + '/events';
-
-//     let date = 'upcoming';
-
-//     let query = {
-//         app_id: process.env.app_id,
-//         date: date
-
-//     }
-//     superAgent.get(eventURL).query(query).then(data => {
-
-//         var dataArray = data.body;
-
-//         if (dataArray.length === 0) {
-//             let result = 'No upcoming events for now, search again later :)';
-//             finalRes = result;
-
-//             res.send("<h1> No upcoming events for now, search again later :) </h1>")
-
-//         } else {
-//             let image;
-//             let artistName;
-//             let fbpage;
-
-//             if (dataArray[0].artist) {
-//                 image = dataArray[0].artist.thumb_url;
-//                 artistName = dataArray[0].artist.name;
-//                 fbpage = dataArray[0].artist.facebook_page_url;
-//             }
-
-//             dataArray.forEach((event) => {
-
-//                 if (event.length !== 0) {
-
-//                     // image = dataArray[0].artist.thumb_url;
-//                     //         artistName = dataArray[0].artist.name;
-//                     //         fbpage = dataArray[0].artist.facebook_page_url;
-
-//                     let eventObject = new EventConstructor(event.offers[0].url, event.offers[0].status, event.venue.country, event.venue.city, event.venue.name, event.venue.region, event.datetime, event.on_sale_datetime, event.description, artistName, image, fbpage);
-//                     // console.log(eventObject); 
-//                     finalRes.push(eventObject);
-//                     // console.log(finalRes); 
-//                 }
-//             });
-//             res.render('eventResult', { searchResults: finalRes });
-//         }
-
-//         // res.status(200).send(finalRes);
-//         res.render('eventResult', { searchResults: finalRes });
-
-//     }).catch(error => {
-//         console.log(error + "Error of superAgent");
-//     })
-//         .catch(error => {
-//             console.log(error + " : Error of superAgent");
-//         })
-
-// }
 function handleEvents(req, res) {
     var finalRes = [];
     let searchQuery = req.query.artist;
@@ -410,12 +385,14 @@ function saveToDB(req, res) {
 function handleDataBaseEvents(req, res) {
     let sql = `SELECT * FROM event`;
     client.query(sql).then(data => {
-        console.log(data.rows);
+        // console.log(data.rows);
         res.render('dataBaseEvents', { eventResults: data.rows });
     }).catch(error => {
         console.log('error on rendering events from DB', error);
     });
 }
+
+
 // .............................................................................. CONSTRUCTOR
 function EventConstructor(offers, status, country, city, name, region, datetime, on_sale_datetime, description, artistName, thumb_url, facebook_page_url) {
 

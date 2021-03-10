@@ -1,63 +1,64 @@
 <%- include('../layout/head')%>
+  <%- include('../layout/navbar')%>
 
+    <body>
+      <div class="layout-container searchEventsBox">
+        <form action="/songs" method="GET">
+          <input type="text" name="formatInput" id="song" placeholder="songs">
+          <input type="submit" value="Search">
 
-  <body>
-    <form action="/songs" method="GET">
-      <input type="text" name="formatInput" id="song" placeholder="songs">
-      <input type="submit" value="Search">
+          <label for="singer">Artist</label>
+          <input type="radio" name="searchBy" value="q_artist" id="singer">
 
-      <label for="singer">Artist</label>
-      <input type="radio" name="searchBy" value="q_artist" id="singer">
+          <label for="track">Song</label>
+          <input type="radio" name="searchBy" value="q_track" id="track">
 
-      <label for="track">Song</label>
-      <input type="radio" name="searchBy" value="q_track" id="track">
+          <label for="lyrics">Lyrics</label>
+          <input type="radio" name="searchBy" value="q_lyrics" id="lyrics">
+        </form>
+
 
       <label for="lyrics">Lyrics</label>
       <input type="radio" name="searchBy" value="q_lyrics" id="lyrics">
     </form>
 
-    <% songSearches.forEach(song=> { %>
-      <br>
-      <br>
-      <br>
-      <ul>
-        <li>
-          <div>
-            <iframe width="420" height="315"
-            src="https://www.youtube.com/embed/<%= song.youtube %>">
-            </iframe>
-          </div>
-          <div>
-            title: <%=song.title%>
-          </div>
-          <div>
-            Artist: <%=song.artist%>
-          </div>
-          <div>
-            Album name: <%=song.album%>
-          </div>
-          <div>
-            Rating: <%=song.rating%>
-          </div>
-          <div>
-            <form action="/songs/add" method="post">
-              <input type="text" name="title" value="<%=song.title%>" hidden>
-              <input type="text" name="artist" value="<%=song.artist%>" hidden>
-              <input type="text" name="album" value="<%=song.album%>" hidden>
-              <input type="text" name="rating" value="<%=song.rating%>" hidden>
-              <input type="text" name="genre" value="<%=song.genre%>" hidden>
-              <input type="text" name="image_url" value="<%=song.image_url%>" hidden>
-              <button type="submit">Add to library</button>
-            </form>
-          </div>
-        </li>
-      </ul>
-      <% })%>
 
+  
 
+        <% songSearches.forEach(song=> { %>
+          <div class="container">
+            <div class="cards">
+              <a class="card" href="#" style="background: #17223b; color:white;">
+                <span class="card-header">
+                  <iframe width="100%" height="80%" src="https://www.youtube.com/embed/<%= song.youtube %>">
+                  </iframe>
+                  <span class="card-title">
+                    <h3>Title: <%=song.title%>
+                    </h3>
+                  </span>
+                </span>
+                <span class="card-summary " >
+                  Artist: <%=song.artist%> <br>
+                    Album name: <%=song.album%><br>
+                      Rating: <%=song.rating%><br>
+                </span>
+                <span class="card-meta">
+                    <form class="form" action="/songs/add" method="post">
+                      <input type="text" name="title" value="<%=song.title%>" hidden>
+                      <input type="text" name="artist" value="<%=song.artist%>" hidden>
+                      <input type="text" name="album" value="<%=song.album%>" hidden>
+                      <input type="text" name="rating" value="<%=song.rating%>" hidden>
+                      <input type="text" name="genre" value="<%=song.genre%>" hidden>
+                      <input type="text" name="image_url" value="<%=song.image_url%>" hidden>
+                      <button type="submit">Add to library</button>
+                    </form>
+                    <!-- <button class="cancle">cancle</button> -->
+                </span>
+              </a>
+            </div>
+          </div>
+          <% })%>
+      <%- include('../layout/footer') %>
+    </body>
 
-  </body>
-
-  </html>
-
-
+    </html>
