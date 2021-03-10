@@ -133,7 +133,7 @@ function handleSongsSearches(req, res) {
             })
 
 
-            res.render("pages/searches", { songSearches: arrayOfObject });
+            // res.render("pages/searches", { songSearches: arrayOfObject });
 
         })
         .catch(error => {
@@ -165,6 +165,7 @@ let mySearch=`${artist} ${song}`
         })
         .catch(error => {
             console.log('Error occurred while getting the lyrics', error);
+
         })
 }
 function saveToDB(req, res) {
