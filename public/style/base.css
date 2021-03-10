@@ -74,12 +74,12 @@ nav ul li {
 
 /*  .................. ............................ footer */
 footer{
-  padding:  3% 0 ;
+  padding:  1% 0 ;
   text-align: center;
-  word-spacing: 5px;
+  word-spacing: 3px;
 }
 footer p {
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: 500;
 }
 /* nav ul li:hover {
