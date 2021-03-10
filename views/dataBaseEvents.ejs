@@ -47,8 +47,8 @@
 
                                         <form action="/deleteDataEvent/<%= event.id %>?_method=Delete" method="post"
                                             id="myForm">
-                                            <button class="home-event-button" id="saveforLater"
-                                                type="submit">Delete</button>
+                                            <input class="home-event-button" id="saveforLater" value="DeleteEvent"
+                                                type="submit" />
 
                                             <input type="hidden" name="offers" value="<%= event.offers %>" hidden>
                                             <input type="hidden" name="status" value="<%= event.status %>" hidden>
@@ -68,16 +68,13 @@
 
                                             <input type="hidden" name="facebook_page_url"
                                                 value="<%= event.facebook_page_url %>" hidden>
-
                                         </form>
                                     </div>
                                 </figcaption>
-
                     </div>
                     <diV>
                         <form action="/saveEvent" method="POST" style='display: none;'>
                             <label for=""></label>
-
 
                             <input type="hidden" name="offers" value="<%= event.offers %>"> <br>
                             <input type="hidden" name="status" value="<%= event.status %>"><br>

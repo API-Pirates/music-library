@@ -60,13 +60,14 @@
     color: #fff;
     pointer-events: none;
     transition: .5s;
-
   }
-  
+  /* background-color: #222029; */
   .login-box .user-box input:valid ~ label {
     top: -20px;
     left: 0;
-    color: #03e9f4;
+    color: #C13264;
+    font-weight: 700;
+    letter-spacing: 2px;
     font-size: 0.9em;
     margin: 5px;
   }
@@ -94,13 +95,13 @@
   }
 
   .login-box a:hover {
-    background: #03e9f4;
+    background: #C13264;
     color: #fff;
     border-radius: 5px;
-    box-shadow: 0 0 5px #03e9f4,
-                0 0 25px #03e9f4,
-                0 0 50px #03e9f4,
-                0 0 100px #03e9f4;
+    box-shadow: 0 0 5px #C13264,
+                0 0 25px #C13264,
+                0 0 50px #C13264,
+                0 0 100px #C13264;
   }
  /* .......................................... mobile view styles for forms */
   @media( max-width:700px){

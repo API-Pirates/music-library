@@ -115,7 +115,7 @@
        display: inline-block;
        width: 100%;
        vertical-align:top;
-       background-color: #ff6768;
+       background-color: #a02e69;
        padding: 5% 2%;
    }
 
@@ -129,10 +129,10 @@
    margin: 5% 3%;
   }
   .home-event-button{
-    background-color: white;
+    background-color: #38375F;
     border: none;
-    color: black;
-    padding: 16px 32px;
+    color: #eeeeee;
+    padding: 8px 10px ;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -140,11 +140,11 @@
     margin: 2% 5%;
     transition-duration: 0.4s;
     cursor: pointer;
-    border: 2px solid #555555;
   }
   
   .home-event-button:hover {
-    background-color: #555555;
+ 
+    background-color: #222029;
     color: white;
   }
    /* ............ carousel homepage */ 
@@ -173,10 +173,9 @@
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
-    justify-content: space-evenly;
 }
 .events-flex form{
-   width: fit-content;
+   margin: 0 1%;
 }
 
   /* ======================= START ABOUT US PAGE ================= */
