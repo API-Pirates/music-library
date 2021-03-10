@@ -1,6 +1,6 @@
 'use strict';
 
-const youtubeUrl="https://youtube.googleapis.com/youtube/v3/search?q=sia unstoppable&key=AIzaSyBgNqjdZgwATQEtTx8ZXCrW9eZDt8pSUmg&type=video"
+const youtubeUrl = "https://youtube.googleapis.com/youtube/v3/search?q=sia unstoppable&key=AIzaSyBgNqjdZgwATQEtTx8ZXCrW9eZDt8pSUmg&type=video"
 const express = require('express');
 const cors = require('cors');
 const pg = require('pg');
@@ -16,10 +16,10 @@ app.use(override('_method'));
 app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 const PORT = process.env.PORT;
-// const client = new pg.Client(process.env.DATABASE_URL);
+/*  const client = new pg.Client(process.env.DATABASE_URL); */
 
 const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
 
@@ -82,7 +82,7 @@ function handleAddSong(req, res) {
 
 
 function handleHomePage(req, res) {
-   // show top rated songs and interesting events
+    // show top rated songs and interesting events
     let topRated = [];
     let randomEvents = []
     let ratingQuery = 'SELECT title, rating, image_url, artist FROM song ORDER BY rating DESC LIMIT 5;';
@@ -115,22 +115,22 @@ function handleSongsSearches(req, res) {
 
     // console.log(query);
 
-    arrayOfObject=[];
+    arrayOfObject = [];
 
     let url = "http://api.musixmatch.com/ws/1.1/track.search";
 
     superAgent.get(url).query(query)
         .then(data => {
             let songs = JSON.parse(data.text).message.body.track_list;
-            
+
             testFunction(songs)
-            .then(data => {
-            
-                res.render("pages/searches", { songSearches: arrayOfObject });
-            })
-            .catch(error => {
-                console.log('Error from the test function', error);
-            })
+                .then(data => {
+
+                    res.render("pages/searches", { songSearches: arrayOfObject });
+                })
+                .catch(error => {
+                    console.log('Error from the test function', error);
+                })
 
         })
         .catch(error => {
@@ -140,22 +140,22 @@ function handleSongsSearches(req, res) {
 
 
 
-function youtubeData(artist,song) {
-let mySearch=`${artist} ${song}`
+function youtubeData(artist, song) {
+    let mySearch = `${artist} ${song}`
     let query = {
-        q:mySearch,
-        key:process.env.YOUTUBE_KEY,
-        type:"video",
-        maxResults:1
+        q: mySearch,
+        key: process.env.YOUTUBE_KEY,
+        type: "video",
+        maxResults: 1
     }
     // https://youtube.googleapis.com/youtube/v3/search?q=sia unstoppable&key=AIzaSyBgNqjdZgwATQEtTx8ZXCrW9eZDt8pSUmg&type=video
 
     let url = `https://youtube.googleapis.com/youtube/v3/search`;
 
-     return superAgent.get(url).query(query)
+    return superAgent.get(url).query(query)
         .then(data => {
 
-             return JSON.parse(data.text).items[0].id.videoId;
+            return JSON.parse(data.text).items[0].id.videoId;
         })
         .catch(error => {
             console.log('Error occurred while getting the lyrics', error);
@@ -194,9 +194,9 @@ var testFunction = function (songs) {
         for (let i = 0; i < songs.length; i++) {
             const song = songs[i];
             youtubeData(song.track.artist_name, song.track.track_name).then(data => {
-             
+
                 song.track.youtube = data;
-                
+
                 arrayOfObject.push(new Song(song.track));
                 if (i === songs.length - 1) {
                     resolved(true);
@@ -419,7 +419,7 @@ function Song(song) {
     this.album = song.album_name;
     this.rating = song.track_rating;
     this.genre = genre;
-    this.youtube=song.youtube;
+    this.youtube = song.youtube;
     this.lyrics = song.lyrics || "none";
     this.image_url = song.image_url || "images/default song.jpg";
 }
