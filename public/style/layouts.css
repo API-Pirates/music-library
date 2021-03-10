@@ -331,7 +331,6 @@ margin-bottom: 3%;
   -webkit-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
 }
-  }
   
   * {
     -moz-transition-property: background-color, border-color, box-shadow, color, opacity, text-shadow, -moz-transform;
@@ -346,5 +345,4 @@ margin-bottom: 3%;
     -o-transition-timing-function: linear;
     -webkit-transition-timing-function: linear;
     transition-timing-function: linear;
-  }
-  
+  }}
