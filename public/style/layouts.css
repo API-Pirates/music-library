@@ -1,7 +1,8 @@
 /* ..................................................... search song and event form */
 .layout-container{
-   padding: 3% 5%;
+   padding: 2% 5%;
    width: 100%;
+       margin-bottom: 26px;
 }
 
 .display-books{
@@ -18,7 +19,8 @@
     top: 65%;
     left: 50%; */
     margin: 1% auto;
-    width: 50%;
+    width: 60%;
+    /* height: 260px; */
     
     /* margin: auto; */
     /* transform: translate(-50%, -50%); */
@@ -35,6 +37,10 @@
     text-align: center;
   } */
   
+  .navbar-dark .navbar-nav .nav-link:hover {
+    color: #C13264;
+}
+
   .login-box .user-box {
     /* position: relative; */
   }
@@ -68,7 +74,7 @@
     color: #C13264;
     font-weight: 700;
     letter-spacing: 2px;
-    font-size: 0.9em;
+    font-size: 1.2em;
     margin: 5px;
   }
   

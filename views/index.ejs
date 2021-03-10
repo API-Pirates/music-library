@@ -16,10 +16,14 @@
                     <h1>Music Library</h1>
                 </div>
                 <div id="search-toggle-btn">
-                    <label for="">Search For : </label>
+                    <label style="font-size: 1.50em;">Search For : </label>
+                    <button style="background-color: rgba(0, 0, 0, -0.5);">
                     <span id='btn-search-event' class="toggle-button">Event</span>
+                    </button>
                     <span class="seperator"></span>
-                    <span id='btn-search-song' class="toggle-button">Song</span>
+                    <button style="background-color: rgba(0, 0, 0, -0.5);">
+                        <span id='btn-search-song' class="toggle-button">Song</span>
+                    </button>
                 </div>
                 <div id='search-event' class="login-box layout-container forms-hide">
                     <!-- <h2>Search for Event</h2> -->
@@ -38,7 +42,7 @@
                     <form action="/songs" method="GET">
                         <div class="user-box">
                             <!-- <form action="/songs" method="GET"> -->
-                            <input type="text" name="formatInput" id="song" placeholder="songs">
+                            <input type="text" name="formatInput" id="song" placeholder="Search for songs">
 
                             <label class="search-song-label" for=" singer">Artist</label>
                             <input type="radio" name="searchBy" value="q_artist" id="singer">
