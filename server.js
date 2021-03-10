@@ -28,25 +28,16 @@ const client = new pg.Client(process.env.DATABASE_URL);
 /Home/
 app.get('/', handleHomePage);
 
-app.get("/songs", handleSongsSearches);
-
-app.post('/songs/add', handleAddSong)
-
-app.get('/events', handleEvents);
-
 app.post('/saveEvent', saveToDB);
 app.get('/dataBaseEvents', handleDataBaseEvents);
-
-
-app.get("/events/:id", handleOneEvent);
-app.delete("/deleteDataEvent/:id", deletehandlerEvent);
-
 app.get('/about', handleAboutUs);
 app.get('/contact', handleContact);
 
-/songs/
+/*songs*/
+app.get("/songs", handleSongsSearches);
 app.get("/datasong", handlesongpage);//list of all songs 
 app.get("/songs/:id", handleSong);//view single song
+app.post('/songs/add', handleAddSong)  // add song to database
 // app.get("/searches/songs", handleSongsSearches);
 app.delete("/deleteData/:id", deletehandler);//delete one song
 app.put("/updateData/:id", handleupdateSong) // update data for one song 
@@ -56,7 +47,8 @@ app.get("/dataevent", handleEvent);//list all event
 app.get('/events', handleEvents);
 app.get("/events/:id", handleOneEvent);///view single event 
 app.delete("/deleteDataEvent/:id", deletehandlerEvent); // remove event
-app.get('*', handle404);
+
+app.get('*', handle404); // handle 404 router
 
 // ............................................................................... Handlers
 
@@ -90,7 +82,7 @@ function handleAddSong(req, res) {
 
 
 function handleHomePage(req, res) {
-
+   // show top rated songs and interesting events
     let topRated = [];
     let randomEvents = []
     let ratingQuery = 'SELECT title, rating, image_url, artist FROM song ORDER BY rating DESC LIMIT 5;';
