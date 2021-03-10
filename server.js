@@ -429,5 +429,4 @@ function Song(song) {
 client.connect()
     .then(() => {
         app.listen(PORT, () => { console.log('app is running on' + PORT) })
-    })
-    .catch(error => console.log(error + ' error'));
+    }) .catch(error => console.log(error + ' error'));
