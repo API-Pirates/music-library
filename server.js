@@ -26,7 +26,6 @@ const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: 
 // .............................................................................. ROUTES
 
 
-/Home/
 app.get('/', handleHomePage);
 
 app.post('/saveEvent', saveToDB);
