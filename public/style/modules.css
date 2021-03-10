@@ -17,7 +17,7 @@
     padding: 3% 0 ;
     background-image: url('../images/bg1.jpg');
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: 107%;
     animation-name :slide-bg;
     animation-duration: 20s;
     animation-iteration-count: infinite;
