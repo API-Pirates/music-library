@@ -4,27 +4,30 @@
         <body>
 
             <% data.forEach(song=> { %>
-                
-                <div class="container">
-                    <div class="cards">
-                        <a class="card" href="#" style="background: #17223b; color:white;">
-                            <span class="card-header"><img src='<%= song.image_url%>' alt="">
-                            <span class="card-title">
-                                <h3> <%= song.title %></h3>
+
+                <div class="container1">
+                    <div class="cards1">
+                        <a class="card1" href="#" style="background: #17223b; color:white;">
+                            <span class="card-header1"><img src='<%= song.image_url%>' alt="">
+                                <span class="card-title1">
+                                    <h3>
+                                        <%= song.title %>
+                                    </h3>
+                                </span>
                             </span>
-                        </span>
-                        
-                        <span class="card-summary">
-                            <%= song.artist %>
-                        </span>
-                        <span class="card-meta">
-                            <form action="/songs/<%= song.id %>">
-                                <button class="style-button" id="showBook" style="color: black;">Details</button>
-                            </form>
-                            <!-- <a ></a> -->
-                        </span>
-                    </a>
-                </div>
+
+                            <span class="card-summary1">
+                                <%= song.artist %>
+                            </span>
+                            <span class="card-meta1">
+                                <form action="/songs/<%= song.id %>">
+                                    <button class="style-button" id="showBook" style="color: black;">Details</button>
+
+                                </form>
+                                <!-- <a ></a> -->
+                            </span>
+                        </a>
+                    </div>
                 </div>
                 <% }) %>
             

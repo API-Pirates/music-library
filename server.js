@@ -123,7 +123,6 @@ function handleSongsSearches(req, res) {
 
             testFunction(songs)
                 .then(data => {
-
                     res.render("pages/searches", { songSearches: arrayOfObject });
                 })
                 .catch(error => {
@@ -157,6 +156,7 @@ function youtubeData(artist, song) {
         })
         .catch(error => {
             console.log('Error occurred while getting the lyrics', error);
+
         })
 
         function saveToDB(req, res) {
