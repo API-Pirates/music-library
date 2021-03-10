@@ -80,12 +80,19 @@
  .grid-item{
      flex : 30%;
      margin: 0 15px;
+     justify-content: space-around;
  }
    #home-top-five-rated article{
        text-align:left;
+       width: 250px;
+       max-width: 300px;
    }
    #home-top-five-rated article img {
     width: 100%;
+    height: 250px;
+    max-height: 300px;
+    
+    
    }
 
    /* ....................... events remainder */

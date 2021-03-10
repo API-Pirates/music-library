@@ -19,9 +19,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 const PORT = process.env.PORT;
-// const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URL);
 
-const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
+// const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
 
 // .............................................................................. ROUTES
 
@@ -159,22 +159,22 @@ function youtubeData(artist, song) {
             console.log('Error occurred while getting the lyrics', error);
         })
 
-        function saveToDB(req, res) {
-    var finalRes = [];
-    var result = 'No upcoming events for now, search again later :)'
-    let dataArray = req.body;
-    // console.log(dataArray.description);
+    function saveToDB(req, res) {
+        var finalRes = [];
+        var result = 'No upcoming events for now, search again later :)'
+        let dataArray = req.body;
+        // console.log(dataArray.description);
 
-    let InsertQuery = 'INSERT INTO event(event_url, status, country, city, region, name, date, saleDate, image_url, description, artistName, facebook_page_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 ,$12) RETURNING *;';
-    let safeValues = [dataArray.offers, dataArray.status, dataArray.country, dataArray.city, dataArray.region, dataArray.namePlace, dataArray.datetime, dataArray.on_sale_datetime, dataArray.image_url, dataArray.description, dataArray.artistName, dataArray.facebook_page_url];
-    client.query(InsertQuery, safeValues).then((data) => {
-        res.redirect('/dataBaseEvents');
-        console.log('added to the database');
+        let InsertQuery = 'INSERT INTO event(event_url, status, country, city, region, name, date, saleDate, image_url, description, artistName, facebook_page_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 ,$12) RETURNING *;';
+        let safeValues = [dataArray.offers, dataArray.status, dataArray.country, dataArray.city, dataArray.region, dataArray.namePlace, dataArray.datetime, dataArray.on_sale_datetime, dataArray.image_url, dataArray.description, dataArray.artistName, dataArray.facebook_page_url];
+        client.query(InsertQuery, safeValues).then((data) => {
+            res.redirect('/dataBaseEvents');
+            console.log('added to the database');
 
-    }).catch(error => {
-        console.log('we have an error' + error);
-    });
-}
+        }).catch(error => {
+            console.log('we have an error' + error);
+        });
+    }
 }
 function handleDataBaseEvents(req, res) {
     let sql = `SELECT * FROM event`;
@@ -385,7 +385,6 @@ function handleDataBaseEvents(req, res) {
 
 // .............................................................................. CONSTRUCTOR
 function EventConstructor(offers, status, country, city, name, region, datetime, on_sale_datetime, description, artistName, thumb_url, facebook_page_url) {
-
     this.offers = offers;
     this.status = status;
     this.country = country;
@@ -400,9 +399,9 @@ function EventConstructor(offers, status, country, city, name, region, datetime,
     this.facebook_page_url = facebook_page_url;
 
 };
-
+let singers = ['adele', 'amr diab', 'chris brown', 'david Guetta', 'drake', 'dua lipa', 'ed sheeran', 'eminem', 'imagine dragons', 'justin bieber', 'katy perry', 'maroon 5', 'metallica', 'rihanna', 'sia'];
 function Song(song) {
-    // console.log('The data passed to the construct', song);
+
     let genre;
 
     if (song.primary_genres.music_genre_list.length === 0) {
@@ -418,7 +417,13 @@ function Song(song) {
     this.genre = genre;
     this.youtube = song.youtube;
     this.lyrics = song.lyrics || "none";
-    this.image_url = song.image_url || "images/default song.jpg";
+    singers.forEach(singer => {
+        if (singer === this.artist) {
+            this.image_url = `images/Singers/${song.artist_name.toLowerCase()}.jpg`;
+        } else {
+            this.image_url = "images/default song.jpg";
+        }
+    })
 }
 
 // .............................................................................. CONNECTION
