@@ -19,9 +19,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'))
 
 const PORT = process.env.PORT;
-// const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URL);
 
-const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
+// const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
 
 // .............................................................................. ROUTES
 
@@ -160,8 +160,8 @@ let mySearch=`${artist} ${song}`
         .catch(error => {
             console.log('Error occurred while getting the lyrics', error);
         })
-}
-function saveToDB(req, res) {
+
+        function saveToDB(req, res) {
     var finalRes = [];
     var result = 'No upcoming events for now, search again later :)'
     let dataArray = req.body;
@@ -177,7 +177,7 @@ function saveToDB(req, res) {
         console.log('we have an error' + error);
     });
 }
-
+}
 function handleDataBaseEvents(req, res) {
     let sql = `SELECT * FROM event`;
     client.query(sql).then(data => {
