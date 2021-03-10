@@ -1,16 +1,22 @@
 <%- include('../layout/head')%>
+  <%- include('../layout/navbar')%>
 
+    <body>
+      <div class="layout-container searchEventsBox">
+        <form action="/songs" method="GET">
+          <input type="text" name="formatInput" id="song" placeholder="songs">
+          <input type="submit" value="Search">
 
-  <body>
-    <form action="/songs" method="GET">
-      <input type="text" name="formatInput" id="song" placeholder="songs">
-      <input type="submit" value="Search">
+          <label for="singer">Artist</label>
+          <input type="radio" name="searchBy" value="q_artist" id="singer">
 
-      <label for="singer">Artist</label>
-      <input type="radio" name="searchBy" value="q_artist" id="singer">
+          <label for="track">Song</label>
+          <input type="radio" name="searchBy" value="q_track" id="track">
 
-      <label for="track">Song</label>
-      <input type="radio" name="searchBy" value="q_track" id="track">
+          <label for="lyrics">Lyrics</label>
+          <input type="radio" name="searchBy" value="q_lyrics" id="lyrics">
+        </form>
+
 
       <label for="lyrics">Lyrics</label>
       <input type="radio" name="searchBy" value="q_lyrics" id="lyrics">
@@ -52,9 +58,7 @@
             </div>
           </div>
           <% })%>
+      <%- include('../layout/footer') %>
+    </body>
 
-
-
-  </body>
-
-  </html>
+    </html>

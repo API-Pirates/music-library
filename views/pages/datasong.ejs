@@ -2,9 +2,9 @@
     <%- include('../layout/navbar')%>
 
         <body>
+
             <% data.forEach(song=> { %>
                 
-
                 <div class="container">
                     <div class="cards">
                         <a class="card" href="#" style="background: #17223b; color:white;">
@@ -28,6 +28,9 @@
                 </div>
                 </div>
                 <% }) %>
+            
+            <%- include('../layout/footer') %>
+
         </body>
 
         <!-- </html>

@@ -2,67 +2,77 @@
     <%- include('./layout/navbar')%>
 
         <body>
-            <h1>hello</h1>
-
-            <% eventResults.forEach(event=> { %>
-                <div>
-                    <img src="<%= event.image_url %>" alt="">
-                    <h1> Artist: "<%= event.artistname %>"</h1>
-                    <h3>status: "<%= event.status %>" </h3>
-                    <h3>Place: "<%= event.name %>" </h3>
-                    <h3>location:"<%= event.country +`, ` + event.city +`, `+ event.region %>" </h3>
-                    <h3>datetime: "<%= event.date %>" </h3>
-                    <h3>on_sale_datetime: "<%= event.saledate %>" </h3>
-                    <h3>description: "<%= event.description %>" </h3>
-                    <h3>facebook_page_url: "<%= event.facebook_page_url %>" </h3>
-                    <form action="<%= event.event_url %>">
-                        <input type="submit" value="Book Your Ticket " />
-                    </form>
-
-                    <form action="/deleteDataEvent/<%= event.id %>?_method=Delete" method="post" id="myForm">
-                        <button id="saveforLater" type="submit">Delete</button> <br>
-                        <input type="hidden" name="offers" value="<%= event.offers %>"> <br>
-                        <input type="hidden" name="status" value="<%= event.status %>"><br>
-                        <input type="hidden" name="country" value="<%= event.country %>"><br>
-                        <input type="hidden" name="city" value="<%= event.city %>"><br>
-                        <input type="hidden" name="region" value="<%= event.region %>"><br>
-                        <input type="hidden" name="namePlace" value="<%= event.namePlace %>"><br>
-                        <input type="hidden" name="datetime" value="<%= event.datetime %>"><br>
-                        <input type="hidden" name="on_sale_datetime" value="<%= event.on_sale_datetime %>"><br>
-                        <input type="hidden" name=" description" value="<%= event.description %>"><br>
-                        <input type="hidden" name="image_url" value="<%= event.thumb_url %>">
-                        <br>
-                        <input type="hidden" name="artistName" value="<%= event.artistName %>"><br>
-
-                        <input type="hidden" name="facebook_page_url" value="<%= event.facebook_page_url %>"><br>
-
-                    </form>
-
+            <header class="header">
+                <div class="layout-container">
+                    <h1>Saved Events </h1>
                 </div>
-                <diV>
-                    <form action="/saveEvent" method="POST">
-                        <label for=""></label>
+            </header>
+            <section>
+                <div class="layout-container">
+                    <% eventResults.forEach(event=> { %>
+                        <div>
+                            <img src="<%= event.image_url %>" alt="">
+                            <h1> Artist: "<%= event.artistname %>"</h1>
+                            <h3>status: "<%= event.status %>" </h3>
+                            <h3>Place: "<%= event.name %>" </h3>
+                            <h3>location:"<%= event.country +`, ` + event.city +`, `+ event.region %>" </h3>
+                            <h3>datetime: "<%= event.date %>" </h3>
+                            <h3>on_sale_datetime: "<%= event.saledate %>" </h3>
+                            <h3>description: "<%= event.description %>" </h3>
+                            <h3>facebook_page_url: "<%= event.facebook_page_url %>" </h3>
+                            <form action="<%= event.event_url %>">
+                                <input type="submit" value="Book Your Ticket " />
+                            </form>
+
+                            <form action="/deleteDataEvent/<%= event.id %>?_method=Delete" method="post" id="myForm">
+                                <button id="saveforLater" type="submit">Delete</button> <br>
+                                <input type="hidden" name="offers" value="<%= event.offers %>"> <br>
+                                <input type="hidden" name="status" value="<%= event.status %>"><br>
+                                <input type="hidden" name="country" value="<%= event.country %>"><br>
+                                <input type="hidden" name="city" value="<%= event.city %>"><br>
+                                <input type="hidden" name="region" value="<%= event.region %>"><br>
+                                <input type="hidden" name="namePlace" value="<%= event.namePlace %>"><br>
+                                <input type="hidden" name="datetime" value="<%= event.datetime %>"><br>
+                                <input type="hidden" name="on_sale_datetime" value="<%= event.on_sale_datetime %>"><br>
+                                <input type="hidden" name=" description" value="<%= event.description %>"><br>
+                                <input type="hidden" name="image_url" value="<%= event.thumb_url %>">
+                                <br>
+                                <input type="hidden" name="artistName" value="<%= event.artistName %>"><br>
+
+                                <input type="hidden" name="facebook_page_url"
+                                    value="<%= event.facebook_page_url %>"><br>
+
+                            </form>
+
+                        </div>
+                        <diV>
+                            <form action="/saveEvent" method="POST" style='display: none;'>
+                                <label for=""></label>
 
 
-                        <input type="hidden" name="offers" value="<%= event.offers %>"> <br>
-                        <input type="hidden" name="status" value="<%= event.status %>"><br>
-                        <input type="hidden" name="country" value="<%= event.country %>"><br>
-                        <input type="hidden" name="city" value="<%= event.city %>"><br>
-                        <input type="hidden" name="region" value="<%= event.region %>"><br>
-                        <input type="hidden" name="namePlace" value="<%= event.namePlace %>"><br>
-                        <input type="hidden" name="datetime" value="<%= event.datetime %>"><br>
-                        <input type="hidden" name="on_sale_datetime" value="<%= event.on_sale_datetime %>"><br>
-                        <input type="hidden" name=" description" value="<%= event.description %>"><br>
-                        <input type="hidden" name="image_url" value="<%= event.thumb_url %>">
-                        <br>
-                        <input type="hidden" name="artistName" value="<%= event.artistName %>"><br>
-                        <input type="hidden" name="facebook_page_url" value="<%= event.facebook_page_url %>"><br>
+                                <input type="hidden" name="offers" value="<%= event.offers %>"> <br>
+                                <input type="hidden" name="status" value="<%= event.status %>"><br>
+                                <input type="hidden" name="country" value="<%= event.country %>"><br>
+                                <input type="hidden" name="city" value="<%= event.city %>"><br>
+                                <input type="hidden" name="region" value="<%= event.region %>"><br>
+                                <input type="hidden" name="namePlace" value="<%= event.namePlace %>"><br>
+                                <input type="hidden" name="datetime" value="<%= event.datetime %>"><br>
+                                <input type="hidden" name="on_sale_datetime" value="<%= event.on_sale_datetime %>"><br>
+                                <input type="hidden" name=" description" value="<%= event.description %>"><br>
+                                <input type="hidden" name="image_url" value="<%= event.thumb_url %>">
+                                <br>
+                                <input type="hidden" name="artistName" value="<%= event.artistName %>"><br>
+                                <input type="hidden" name="facebook_page_url"
+                                    value="<%= event.facebook_page_url %>"><br>
 
-                        <!-- <button id="saveforLater" type="submit">Save for later</button> <br> -->
-                    </form>
+                                <!-- <button id="saveforLater" type="submit">Save for later</button> <br> -->
+                            </form>
 
-                </diV>
-                <%})%>
+                        </diV>
+                        <%})%>
+                </div>
+            </section>
+            <%- include('./layout/footer')%>
         </body>
 
         </html>
