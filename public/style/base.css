@@ -88,6 +88,19 @@ nav ul li {
 nav ul li:active {
   transform: translateY(4px);
 } */
+/* ............................ color palette */
+ .color1{
+   background-color: #17223b;
+ }
+ .color1{
+  background-color: #263859;
+}
+.color1{
+  background-color: #6b778d;
+}
+.color1{
+  background-color: #ff6768;
+}
 /* ................................................... */
 @keyframes spring {
   15% {
