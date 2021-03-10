@@ -2,42 +2,25 @@
 .layout-container{
    padding: 3% 5%;
    width: 100%;
+   /* background-color: rgb(82, 1, 46); */
 }
 
 .display-books{
-  /* height: 200px; */
-  /* margin-bottom: 20px; */
-    /* width:500px ; */
     width: 50%;
     background-color: blue;
     margin: 5% 1%;
 }
   
   .login-box {
-    /* position: relative;
-    top: 65%;
-    left: 50%; */
     margin: 1% auto;
     width: 50%;
-    
-    /* margin: auto; */
-    /* transform: translate(-50%, -50%); */
+
     background: rgba(0,0,0,.5);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
   }
-  
-  /* .login-box h2 {
-    margin: 0 0 30px;
-    padding: 0;
-    color: #fff;
-    text-align: center;
-  } */
-  
-  .login-box .user-box {
-    /* position: relative; */
-  }
+
   .login-box .user-box input:first-child{
     width: 100%;
   }
@@ -52,16 +35,12 @@
     background: transparent;
   }
   .login-box .user-box label {
-    /* position: absolute;
-    top:0;
-    left: 0; */
     padding: 10px 0;
     font-size: 16px;
     color: #fff;
     pointer-events: none;
     transition: .5s;
   }
-  /* background-color: #222029; */
   .login-box .user-box input:valid ~ label {
     top: -20px;
     left: 0;
@@ -119,7 +98,6 @@
 
     .login-box .user-box input {
       padding: 0;
-      /* margin-bottom: 30px; */
       border-bottom: 1px solid #fff;
     }
 
@@ -144,12 +122,6 @@
     margin-bottom: 3%;
 
 }
-/* .conSEarch{
-
-  height: 50%;
-  
-  width: 50%;
-} */
 .form{
   display: inline;
   position:relative;

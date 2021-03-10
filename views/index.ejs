@@ -1,15 +1,6 @@
 <%- include('./layout/head')%>
     <%- include('./layout/navbar')%>
-
-
-
-
-
-
-    
         <body>
-
-
             <!-- ..................................... form -->
             <section id='form-section'>
                 <div class="">
@@ -87,9 +78,6 @@
                     <h2> <span class="sub-heading"> Events That Interests You</span> </h2>
                     <!-- ..................................................... carousel -->
                     <div class="w3-content w3-section">
-                        <!-- <img class="mySlides" src="img_la.jpg" style="width:100%">
-                        <img class="mySlides" src="img_ny.jpg" style="width:100%">
-                        <img class="mySlides" src="img_chicago.jpg" style="width:100%"> -->
                         <% events.forEach( event=> {%>
                             <article class="mySlides">
                                 <img src="<%= event.image_url %>" alt="">
@@ -97,20 +85,20 @@
                                     <h3> <span>Artist:</span>
                                         <%= event.artistname %>
                                     </h3>
-                                    <h5> <span>status:</span>
+                                    <h5> <span>Status:</span>
                                         <%= event.status %>
                                     </h5>
                                     <h5> <span>Place:</span>
                                         <%= event.name %>
                                     </h5>
-                                    <h5> <span>location:</span>
+                                    <h5> <span>Location:</span>
                                         <%= event.country +`, ` + event.city +`, `+ event.region %>
                                     </h5>
-                                    <h5> <span>datetime:</span>
+                                    <h5> <span>Datetime:</span>
                                         <%= event.date %>
                                     </h5>
 
-                                    <h5> <span>facebook Profile:</span> <a href="<%= event.facebook_page_url %>">
+                                    <h5> <span>Facebook Page:</span> <a href="<%= event.facebook_page_url %>">
                                             <%= event.artistname %>
                                         </a> </h5>
                                     <form action="<%= event.event_url %>">
@@ -120,46 +108,9 @@
                             </article>
                             <%}) %>
                     </div>
-
-                    <!-- <...................... end of carousel -->
-
-                    <!-- <% events.forEach( event=> {%>
-                        <article class="mySlides">
-                            <img src="<%= event.image_url %>" alt="">
-                            <figcaption>
-                                <h3> <span>Artist:</span>
-                                    <%= event.artistname %>
-                                </h3>
-                                <h5> <span>status:</span>
-                                    <%= event.status %>
-                                </h5>
-                                <h5> <span>Place:</span>
-                                    <%= event.name %>
-                                </h5>
-                                <h5> <span>location:</span>
-                                    <%= event.country +`, ` + event.city +`, `+ event.region %>
-                                </h5>
-                                <h5> <span>datetime:</span>
-                                    <%= event.date %>
-                                </h5>
-                                <h5> <span>On sale datetime:</span>
-                                    <%= event.saledate %>
-                                </h5>
-                                <h5> <span>facebook Profile:</span> <a href="<%= event.facebook_page_url %>">
-                                        <%= event.artistname %>
-                                    </a> </h5>
-                                <form action="<%= event.event_url %>">
-                                    <input class="home-event-button" type="submit" value="Book Your Ticket " />
-                                </form>
-                            </figcaption>
-                        </article>
-                        <%}) %> -->
                 </div>
-
             </section>
             <%- include('./layout/footer')%>
-
-
         </body>
 
         </html>
@@ -197,8 +148,6 @@
                 x[myIndex - 1].style.display = "block";
                 setTimeout(carousel, 3000); // Change image every 2 seconds
             }
-
-
         </script>
         </body>
 

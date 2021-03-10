@@ -19,9 +19,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 const PORT = process.env.PORT;
-// const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URL);
 
-const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
+// const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
 
 // .............................................................................. ROUTES
 
@@ -333,19 +333,13 @@ function handleEvents(req, res) {
 
             dataArray.forEach((event) => {
                 if (event.length !== 0) {
-                    // image = dataArray[0].artist.thumb_url;
-                    //         artistName = dataArray[0].artist.name;
-                    //         fbpage = dataArray[0].artist.facebook_page_url;
 
                     let eventObject = new EventConstructor(event.offers[0].url, event.offers[0].status, event.venue.country, event.venue.city, event.venue.name, event.venue.region, event.datetime, event.on_sale_datetime, event.description, artistName, image, fbpage);
 
-                    // console.log(eventObject); 
-                    finalRes.push(eventObject);
-                    // console.log(finalRes); 
+                    finalRes.push(eventObject); 
                 }
             });
         }
-        // res.status(200).send(finalRes);
         res.render('pages/eventResult', { searchResults: finalRes });
 
     }).catch(error => {
@@ -386,18 +380,18 @@ function handleDataBaseEvents(req, res) {
 // .............................................................................. CONSTRUCTOR
 function EventConstructor(offers, status, country, city, name, region, datetime, on_sale_datetime, description, artistName, thumb_url, facebook_page_url) {
 
-    this.offers = offers;
-    this.status = status;
+    this.offers = offers || "Unavailable";
+    this.status = status || "Unavailable";
     this.country = country? country: 'USA';
-    this.city = city;
-    this.namePlace = name;
-    this.region = region;
+    this.city = city || "Unavailable";
+    this.namePlace = name || "Unavailable";
+    this.region = region || "Unavailable";
     this.datetime = datetime;
-    this.on_sale_datetime = on_sale_datetime;
+    this.on_sale_datetime = on_sale_datetime || "Unavailable";
     this.description = description ? description : 'No information on the event';
     this.artistName = artistName || 'unknown value';
     this.thumb_url = thumb_url ? thumb_url : "No Title Available";
-    this.facebook_page_url = facebook_page_url;
+    this.facebook_page_url = facebook_page_url || "Unavailable";
 
 };
 
