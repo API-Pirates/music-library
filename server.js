@@ -19,9 +19,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'))
 
 const PORT = process.env.PORT;
-// const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URL);
 
-const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
+// const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
 
 // .............................................................................. ROUTES
 
@@ -390,7 +390,7 @@ function EventConstructor(offers, status, country, city, name, region, datetime,
 
     this.offers = offers;
     this.status = status;
-    this.country = country;
+    this.country = country? country: 'USA';
     this.city = city;
     this.namePlace = name;
     this.region = region;

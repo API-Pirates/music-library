@@ -1,15 +1,413 @@
-<%- include('../layout/head')%>
-    <%- include('../layout/navbar')%>
+<!DOCTYPE html>
+<html lang="en">
 
-        <body>
-            <header class="header">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <detalis>MUSICALLY</detalis>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href='style/base.css'>
+    <link rel="icon" href="images/logo.png" type="image/gif" sizes="16x16">
+
+    <style>
+        /* search-results css  */
+
+        @charset "UTF-8";
+        @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+        @import url("https://fonts.googleapis.com/css?family=Orbitron&display=swap");
+        @import url("https://fonts.googleapis.com/css?family=Hind&display=swap");
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* body {
+                background-image: linear-gradient(to right, #034378, #2d4e68);
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                height: 100vh;
+                font-family: "Open Sans", sans-serif;
+            } */
+
+        a {
+            text-decoration: none;
+        }
+
+        h1 {
+            font-family: "Open Sans", sans-serif;
+            font-weight: 300;
+        }
+
+        .sub-parent {
+
+            /* margin: auto; */
+            background: linear-gradient(-67deg, rgba(200, 216, 231, 0.7), rgba(255, 255, 255, 0.8));
+            /* overflow: hidden; */
+            box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.6), 2px 2px 12px #c8d8e7;
+            display: flex;
+        }
+
+        .row {
+            /* max-width: 100%; */
+            margin-top: 5%;
+            /* margin: 30px auto 0; */
+            margin-left: 110px;
+            /* margin: auto;  */
+            /* width:60%;  */
+            /* display: inline-block; */
+
+
+
+        }
+
+        @media(max: width 700px) {
+            .row {
+                margin: auto;
+            }
+        }
+
+        .card {
+            /* float: left; */
+            /* padding: 0 1%; */
+            /* width: 50%; */
+            height: 500px;
+
+            /* margin-left: 10%; */
+            margin: auto;
+
+            margin-bottom: 5%;
+            margin-top: 5%;
+            display: flex;
+
+
+        }
+
+        /* .wrapper{
+                display: flex;
+            } */
+
+
+
+
+
+        .card .wrapper {
+
+            background-color: rgb(255, 255, 255);
+            min-height: 500px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(-67deg, rgba(200, 216, 231, 0.7), rgba(255, 255, 255, 0.8));
+
+            box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.6), 2px 2px 12px #c8d8e7;
+        }
+
+        .card .wrapper:hover .data {
+            transform: translateY(0);
+        }
+
+        .card .data {
+            position: absolute;
+            bottom: 0;
+            width: 60%;
+            transform: translateY(calc(70px + 1em));
+            transition: transform 0.5s;
+
+
+        }
+
+
+        .card .artist {
+            font-size: 1.2em;
+            margin-top: 4%;
+         
+          
+
+        }
+
+        .card .detalis {
+            margin-top: 3%;
+            font-size: 0.5em;
+            margin-bottom: 12%;
+            position: relative;
+            top: 20px;
+            bottom: 20px;
+
+        }
+
+        
+            .card .text {
+                width:160%; 
+                flex-wrap: wrap;
+             
+                font-size: 0.8em;
+                margin-top: 20%;
+                position: relative;
+               top: 20px;
+               bottom: 20px;
+                color: #520704;
+                color: rgb(33, 202, 202);
+                /* display: none; */
+               
+
+
+
+            }
+
+            
+
+          div.text:hover{
+  
+                /* color: #420a06; */
+                
+
+            }
+
+            /* style="width:160%; font-size: 0.8em; margin-top: 2%; */
+
+        .sub-parent .header {
+            color: rgb(34, 3, 3);
+            color: rgb(33, 202, 202);
+            padding: 1em;
+        }
+
+        .sub-parent {
+            /* margin-bottom: 5%; */
+        }
+
+
+
+        .sub-parent .header .date {
+            float: left;
+            font-size: 20px;
+            font-size: larger;
+            font-weight: bolder;
+        }
+
+        .sub-parent .header .date:hover {
+            color: rgb(225, 238, 236);
+        }
+
+
+
+        .sub-parent .data {
+            color: rgb(33, 202, 202);
+            transform: translateY(calc(120px + 10em));
+            font-weight: bolder;
+         
+        }
+
+        .sub-parent .detalis  {
+
+            color: rgb(255, 254, 254);
+            margin-top: 2%;
+            position:relative;
+            top: 20px;
+            bottom: 60px;
+            font-weight:bolder;
+            font-size: 0.55em;
+        
+        }
+
+        .sub-parent .button {
+            display: block;
+            width: 60%;
+            position: relative;
+          top: 40px;
+            text-align: center;
+            font-size: 0.6em;
+            color: rgb(9, 10, 9);
+            line-height: 1;
+            justify-content: center;
+            font-weight: 500;
+            padding: 5%;
+            border-radius: 15px;
+            color: rgb(105, 25, 11);
+          
+
+
+
+        }
+
+        /* .button-box {
+                margin-top: 20px;
+            } */
+
+
+        /* search-box in search results page */
+
+
+
+
+        /* * {
+                -webkit-font-smoothing: antialiased;
+                color: #acbdce;
+            }  */
+
+        :root {
+            --border-radius: 10px;
+        }
+
+        /* body,
+            html {
+                /* background: #e2e9f4; */
+        /* display: grid; */
+
+        /* grid-template: 1fr/100%; */
+        /* place-items: center; */
+        /* }  */
+
+        .searchBox {
+            width: 30%;
+            margin-left: 30%;
+
+        }
+
+        .Card {
+            padding: 1px;
+            border-radius: var(--border-radius);
+            background: linear-gradient(-67deg, rgba(200, 216, 231, 0.7), rgba(255, 255, 255, 0.8));
+            overflow: hidden;
+            box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.6), 2px 2px 12px #c8d8e7;
+            width: 380px;
+            margin-left: 15%;
+            margin-bottom: 5%;
+          
+
+        }
+
+        .searchBox {
+            padding: 1px;
+            border-radius: var(--border-radius);
+            background: linear-gradient(-67deg, rgba(200, 216, 231, 0.7), rgba(255, 255, 255, 0.8));
+            /* overflow: hidden; */
+            box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.6), 2px 2px 12px #c8d8e7;
+            width: 60%;
+            margin: auto;
+
+
+        }
+
+        .innerBox {
+            padding: 16px 16px;
+            background-color: #e2f4e3;
+            border-radius: var(--border-radius);
+
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .Icon {
+            min-width: 46px;
+            min-height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius);
+            margin-right: 12px;
+            box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.6), 2px 2px 12px #c8d8e7;
+            display: inline-block;
+        }
+
+        .Icon svg {
+            transform: translate(-1px, -1px);
+        }
+
+        label {
+            font-family: "Hind", sans-serif;
+            display: block;
+            color: #3c4b66;
+            margin-bottom: 12px;
+            background: linear-gradient(45deg, #6b7b8f, #3c4b66);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .InputContainer {
+            width: 100%;
+        }
+
+        input {
+            background-color: #a9b8c9;
+            padding: 10px 32px;
+
+            border: none;
+            display: block;
+            font-family: "Orbitron", sans-serif;
+            font-weight: 600;
+            color: #420a06;
+            -webkit-appearance: none;
+            transition: all 240ms ease-out;
+            width: 100%;
+
+        }
+
+        input::placeholder {
+            color: #530d227e;
+        }
+
+        input:focus {
+            outline: none;
+            color: #2b0307;
+            background-color: #83607e;
+        }
+
+        .InputContainer:before,
+        .InputContainer:after {
+            left: 0;
+            top: 0;
+            display: block;
+            content: "";
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .InputContainer:before {
+            box-shadow: var(--bottom-shadow);
+        }
+
+        .InputContainer:after {
+            box-shadow: var(--top-shadow);
+        }
+
+        @media(max-width: 768px) {
+            .searchBox {
+
+                width: 80%;
+                margin: auto;
+            }
+        }
+
+        .parent-container {
+            width: 100%;
+            display: flex;
+            margin: auto;
+            flex-wrap: wrap;
+        }
+
+        .button:hover {
+            background-color: #555555;
+            color: white;
+        }
+    </style>
+</head>
+<%- include('../layout/navbar')%>
+
+    <body>
+        <!-- <header class="header">
                 <div class="layout-container">
                     <h1>Upcoming events</h1>
                 </div>
             </header>
             <div class=" searchEventsBox layout-container">
                 <div class="login-box layout-container">
-                    <!-- <h2>Search for Event</h2> -->
+                   
                     <form action="/events" method="GET">
                         <div class="user-box">
                             <input type="text" name="artist" id="artist" placeholder="Search for Event">
@@ -19,58 +417,119 @@
                         </a>
                     </form>
                 </div>
+            </div> -->
+
+        <div class="searchBox">
+            <div class="innerBox">
+                <label>Search for upcoming events </label>
+                <div class="container">
+                    <div class="Icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="#657789" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-search">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                    </div>
+                    <div class="InputContainer">
+                        <form action="/events" method="GET">
+                            <input type="text" name="artist" id="artist" placeholder="please enter artist name">
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <div class="layout-container">
-
-                <% if(searchResults.length> 1){ %>
-                    <% searchResults.forEach(event=> { %>
-
-                        <div>
-                            <img src="<%= event.thumb_url %>" alt="">
-                            <h1> Artist: "<%= event.artistName %>"</h1>
-                            <h3>status: "<%= event.status %>" </h3>
-                            <h3>Place: "<%= event.namePlace %>" </h3>
-                            <h3>location:"<%= event.country +`, ` + event.city +`, `+ event.region %>" </h3>
-                            <h3>datetime: "<%= event.datetime %>" </h3>
-                            <h3>on_sale_datetime: "<%= event.on_sale_datetime %>" </h3>
-                            <h3>description: "<%= event.description %>" </h3>
-                            <h3> Facebook Page: <a href="<%= event.facebook_page_url %>">facebook_page_url:</a>
-                            </h3>
+        </div>
 
 
-                            <form action="<%= event.offers %>">
-                                <input type="submit" value="Book Your Ticket " />
-                            </form>
+        <div class="parent-container">
+            <% if(searchResults.length> 1){ %>
+                <% searchResults.forEach((event, index)=> { %>
+                    <div class="row">
+                        <div class="sub-parent card">
+                            <div class="wrapper"
+                                style='background: url("<%= event.thumb_url %>") center/cover no-repeat;'>
+                                <div class="header">
+                                    <div class="date">
+                                        <span class="day">Date:<%= event.datetime %></span>
+                                    </div>
+                                </div>
+                                <div class="data">
+                                    <div class="content">
+                                     
+                                        <span class="artist">Artist:<%= event.artistName %></span>
+                                        <div class="detalis">
+                                        <h1>held in:<%= event.namePlace%></h1>
+                                        <h1>Status: <%= event.status %></h1>
+                                        <h1>location: <%= event.country +`, ` + event.city +`,
+                                                    `+ event.region %></h1>
+                                        <h1><a href="<%= event.facebook_page_url %>">Facebook page</a>
+                                        </h1>
+                                    </div>
+                                        <div class="text">
+                                        <p class="description"></p>
+                                            info:<%= event.description %>
+                                        </p>
+                                    </div>
 
+
+
+                                        <div class="button-box">
+
+
+                                            <form action="<%= event.offers %>">
+                                                <input class="button" type="submit" value="Book Your Ticket " />
+                                            </form>
+
+                                            <form action="/saveEvent" method="POST">
+                                                <button class="button" id="saveforLater" type="submit">Save for
+                                                    later</button> <br>
+                                                <label for=""></label>
+                                                <input type="hidden" name="offers" value="<%= event.offers %>"> <br>
+                                                <input type="hidden" name="status" value="<%= event.status %>"><br>
+                                                <input type="hidden" name="country" value="<%= event.country %>"><br>
+                                                <input type="hidden" name="city" value="<%= event.city %>"><br>
+                                                <input type="hidden" name="region" value="<%= event.region %>"><br>
+                                                <input type="hidden" name="namePlace"
+                                                    value="<%= event.namePlace %>"><br>
+                                                <input type="hidden" name="datetime" value="<%= event.datetime %>"><br>
+                                                <input type="hidden" name="on_sale_datetime"
+                                                    value="<%= event.on_sale_datetime %>"><br>
+                                                <input type="hidden" name="description"
+                                                    value="<%= event.description %>"><br>
+                                                <input type="hidden" name="image_url" value="<%= event.thumb_url %>">
+                                                <br>
+                                                <input type="hidden" name="artistName"
+                                                    value="<%= event.artistName %>"><br>
+                                                <input type="hidden" name="facebook_page_url"
+                                                    value="<%= event.facebook_page_url %>"><br>
+                                            </form>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <diV>
-                            <form action="/saveEvent" method="POST">
-                                <button id="saveforLater" type="submit">Save for later</button> <br>
-                                <label for=""></label>
-                                <input type="hidden" name="offers" value="<%= event.offers %>"> <br>
-                                <input type="hidden" name="status" value="<%= event.status %>"><br>
-                                <input type="hidden" name="country" value="<%= event.country %>"><br>
-                                <input type="hidden" name="city" value="<%= event.city %>"><br>
-                                <input type="hidden" name="region" value="<%= event.region %>"><br>
-                                <input type="hidden" name="namePlace" value="<%= event.namePlace %>"><br>
-                                <input type="hidden" name="datetime" value="<%= event.datetime %>"><br>
-                                <input type="hidden" name="on_sale_datetime" value="<%= event.on_sale_datetime %>"><br>
-                                <input type="hidden" name="description" value="<%= event.description %>"><br>
-                                <input type="hidden" name="image_url" value="<%= event.thumb_url %>">
-                                <br>
-                                <input type="hidden" name="artistName" value="<%= event.artistName %>"><br>
-                                <input type="hidden" name="facebook_page_url"
-                                    value="<%= event.facebook_page_url %>"><br>
-                            </form>
-                        </diV>
-                        <%});%>
-                            <% } else{ %>
-                                <img class="no-event" src = "images/eventsFinal.png">
+                    </div>
 
-                                <% } %>
-            </div>
-            <%- include('../layout/footer') %>
-        </body>
 
-        </html>
+
+
+
+
+
+                    <%});%>
+                        <% } else{ %>
+                            <img class="no-event" src="images/eventsFinal.png">
+
+                            <% } %>
+
+        </div>
+
+        <%- include('../layout/footer') %>
+
+
+    </body>
+
+</html>
