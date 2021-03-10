@@ -158,8 +158,8 @@ function youtubeData(artist, song) {
         .catch(error => {
             console.log('Error occurred while getting the lyrics', error);
         })
-}
-function saveToDB(req, res) {
+
+        function saveToDB(req, res) {
     var finalRes = [];
     var result = 'No upcoming events for now, search again later :)'
     let dataArray = req.body;
@@ -175,7 +175,7 @@ function saveToDB(req, res) {
         console.log('we have an error' + error);
     });
 }
-
+}
 function handleDataBaseEvents(req, res) {
     let sql = `SELECT * FROM event`;
     client.query(sql).then(data => {

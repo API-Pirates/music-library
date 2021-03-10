@@ -158,8 +158,8 @@
     .grid-item article{
         flex: 100%;
    }
-
-   #home-events article{
+   
+      #home-events article{
     width: 90%;
    } 
    
@@ -178,3 +178,541 @@
 .events-flex form{
    width: fit-content;
 }
+
+  /* ======================= START ABOUT US PAGE ================= */
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 200;
+    src: url(https://fonts.gstatic.com/s/sourcesanspro/v14/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wlxdr.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 300;
+    src: url(https://fonts.gstatic.com/s/sourcesanspro/v14/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdr.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/sourcesanspro/v14/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7g.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 600;
+    src: url(https://fonts.gstatic.com/s/sourcesanspro/v14/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwlxdr.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 700;
+    src: url(https://fonts.gstatic.com/s/sourcesanspro/v14/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwlxdr.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 900;
+    src: url(https://fonts.gstatic.com/s/sourcesanspro/v14/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwlxdr.ttf) format('truetype');
+  }
+  #aboutUs-page {
+    font-family: 'Source Sans Pro', sans-serif;
+    text-rendering: optimizeLegibility;
+  }
+  a.btn {
+    background: #0096a0;
+    border-radius: 4px;
+    box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.25);
+    color: #ffffff;
+    display: inline-block;
+    padding: 6px 30px 8px;
+    position: relative;
+    text-decoration: none;
+    transition: all 0.1s 0s ease-out;
+  }
+  .no-touch a.btn:hover {
+    background: #00a2ad;
+    box-shadow: 0px 8px 2px 0 rgba(0, 0, 0, 0.075);
+    transform: translateY(-2px);
+    transition: all 0.25s 0s ease-out;
+  }
+  .no-touch a.btn:active,
+  a.btn:active {
+    background: #008a93;
+    box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.25);
+    transform: translate3d(0, 1px, 0);
+    transition: all 0.025s 0s ease-out;
+  }
+  div.cards-samer {
+    margin: 80px auto;
+    max-width: 100%;
+    text-align: center;
+  }
+  div.card-samer {
+    background: #ffffff;
+    display: inline-block;
+    margin: 8px;
+    max-width: 450px;
+    perspective: 1000;
+    position: relative;
+    text-align: left;
+    transition: all 0.3s 0s ease-in;
+    width: 450px;
+    z-index: 1;
+  }
+  div.card-samer img {
+    max-width: 450px;
+  }
+  div.card-samer .card__image-holder-samer {
+    background: rgba(0, 0, 0, 0.1);
+    height: 0;
+    padding-bottom: 75%;
+  }
+  div.card-samer div.card-title-samer {
+    background: #ffffff;
+      padding: 6px 15px 41px;
+      position: relative;
+      z-index: 0;
+  }
+  div.card-samer div.card-title-samer a.toggle-info-samer {
+    border-radius: 32px;
+    height: 32px;
+    padding: 0;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    width: 32px;
+  }
+  div.card-samer div.card-title-samer a.toggle-info-samer span {
+    background: #ffffff;
+    display: block;
+    height: 2px;
+    position: absolute;
+    top: 16px;
+    transition: all 0.15s 0s ease-out;
+    width: 12px;
+  }
+  div.card-samer div.card-title-samer a.toggle-info-samer span.left {
+    right: 14px;
+    transform: rotate(45deg);
+  }
+  div.card-samer div.card-title-samer a.toggle-info-samer span.right {
+    left: 14px;
+    transform: rotate(-45deg);
+  }
+  div.card-samer div.card-title-samer h2 {
+    font-size: 35px;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    margin: 0;
+    padding: 0;
+    color:#a12f6a;
+  }
+  div.card-samer div.card-title-samer h2 small {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+  div.card-samer div.card-description-samer {
+    padding: 0 15px 10px;
+    position: relative;
+    font-size: 25px;
+    color: #a12f6a;
+  }
+  div.card-samer div.card-actions-samer {
+    box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.075);
+    padding: 10px 15px 20px;
+    text-align: center;
+  }
+  div.card-samer div.card-flap-samer {
+    background: #d9d9d9;
+    position: absolute;
+    width: 100%;
+    transform-origin: top;
+    transform: rotateX(-90deg);
+  }
+  div.card-samer div.flap1 {
+    transition: all 0.3s 0.3s ease-out;
+    z-index: -1;
+  }
+  div.card-samer div.flap2 {
+    transition: all 0.3s 0s ease-out;
+    z-index: -2;
+  }
+  div.cards-samer.showing div.card-samer {
+    cursor: pointer;
+    opacity: 0.6;
+    transform: scale(0.88);
+  }
+  .no-touch div.cards-samer.showing div.card-samer:hover {
+    opacity: 0.94;
+    transform: scale(0.92);
+  }
+  div.card-samer.show {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+  div.card-samer.show div.card-title-samer a.toggle-info-samer {
+    background: #ff6666 !important;
+  }
+  div.card-samer.show div.card-title-samer a.toggle-info-samer span {
+    top: 15px;
+  }
+  div.card-samer.show div.card-title-samer a.toggle-info-samer span.left {
+    right: 10px;
+  }
+  div.card-samer.show div.card-title-samer a.toggle-info-samer span.right {
+    left: 10px;
+  }
+  div.card-samer.show div.card-flap-samer {
+    background: #ffffff;
+    transform: rotateX(0deg);
+  }
+  div.card-samer.show div.flap1 {
+    transition: all 0.3s 0s ease-out;
+  }
+  div.card-samer.show div.flap2 {
+    transition: all 0.3s 0.2s ease-out;
+  }
+  h1 {
+    text-align: center;
+  }
+   
+  /* ===================END about us page======================= */
+
+/* ======================Contact us page======================== */
+
+@import "https://fonts.googleapis.com/css?family=Karla";
+:root {
+  font-size: 13px;
+}
+
+@media screen and (min-width: 1000px) {
+  :root {
+    font-size: 14px;
+  }
+}
+@media screen and (min-width: 1240px) {
+  :root {
+    font-size: 16px;
+  }
+}
+@media screen and (min-width: 1480px) {
+  :root {
+    font-size: 17px;
+  }
+}
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Karla";
+  font-size: 20px;
+  font-weight: 300;
+  color: #eeeeee;
+  line-height: 2em;
+  background: #eeeeee;
+}
+
+.main {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  height: 100vh;
+  background: linear-gradient(120deg, #38375F 50%, #222029 50%);
+}
+.main .header,
+.main legend.header {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 2rem;
+  margin: 0.5em 0;
+  line-height: 1.1;
+}
+.main .bio,
+.main .contact {
+  width: 20%;
+  margin-block: auto;
+}
+
+.bio p {
+  font-size: 25px;
+}
+.main .bio .profile-img {
+  max-width: 15em;
+}
+.main .bio .bio-link {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 1rem;
+  display: inline-block;
+  float: left;
+  clear: left;
+  text-decoration: none;
+  color: #eeeeee;
+  margin-bottom: 0.25em;
+  transition: color 300ms ease-in-out;
+}
+
+.main span {
+  font-size: 23px;
+  font-style: italic;
+}
+.main .bio .bio-link i {
+  margin-left: 8px;
+}
+.main .bio .bio-link::after {
+  display: block;
+  content: "";
+  height: 1px;
+  width: 0;
+  background: #ca8d6e;
+  transition: width 300ms ease-in-out;
+}
+.main .bio .bio-link:hover::after {
+  width: 100%;
+}
+.main .bio .bio-link:hover {
+  color: #ca8d6e;
+}
+.main .contact {
+  color: #ca8d6e;
+}
+.main .contact form fieldset {
+  font-size: 1rem;
+  position: relative;
+  border: none;
+  margin-bottom: 0.25em;
+  padding: 0.25em 0;
+}
+.main .contact form fieldset label {
+  font-size: 0.875rem;
+  display: block;
+  position: absolute;
+  right: 0.125em;
+  top: 1.5em;
+  color: #ca8d6e;
+}
+.main .contact form input,
+.main .contact form textarea,
+.main .contact form button {
+  border: 0;
+  font-size: 15px;
+}
+.main .contact form input:focus,
+.main .contact form textarea:focus,
+.main .contact form button:focus {
+  outline: none;
+}
+.main .contact form input,
+.main .contact form textarea {
+  display: block;
+  font-family: "Karla";
+  font-size: 1.5rem;
+  padding: 0.5em 0;
+  width: 100%;
+  background: none;
+  color: #ca8d6e;
+  border-bottom: 1px solid #7d6962;
+  transition: border 300ms ease-in-out;
+  line-height: 15px;
+}
+.main .contact form input:focus,
+.main .contact form textarea:focus {
+  border-bottom: 1px solid #ca8d6e;
+}
+.main .contact form input::-moz-placeholder, .main .contact form textarea::-moz-placeholder {
+  color: #7d6962;
+}
+.main .contact form input:-ms-input-placeholder, .main .contact form textarea:-ms-input-placeholder {
+  color: #7d6962;
+}
+.main .contact form input::placeholder,
+.main .contact form textarea::placeholder {
+  color: #7d6962;
+}
+.main .contact button {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 1rem;
+  display: block;
+  background: #ca8d6e;
+  color: #eeeeee;
+  padding: 1em 2em;
+  box-shadow: 0 0 40px 0 rgba(21, 21, 21, 0.6);
+}
+.main .contact button:hover {
+  -webkit-animation: swell 500ms ease-in-out;
+          animation: swell 500ms ease-in-out;
+  cursor: pointer;
+}
+
+button {
+    margin: o auto;
+} 
+
+button#btn-submit {
+    font-size: 15px;
+    margin: 0 auto;
+}
+.main .contact textarea {
+  resize: none;
+  line-height: 20px;
+}
+
+.main {
+  overflow: hidden;
+  -webkit-animation: Page 600ms ease-in-out forwards;
+          animation: Page 600ms ease-in-out forwards;
+}
+
+.bio {
+  -webkit-animation: Bio 600ms ease-in-out forwards;
+          animation: Bio 600ms ease-in-out forwards;
+}
+
+.contact {
+  -webkit-animation: Contact 600ms ease-in-out forwards;
+          animation: Contact 600ms ease-in-out forwards;
+}
+
+@-webkit-keyframes Page {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes Page {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes Bio {
+  0% {
+    transform: translateX(-50vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes Bio {
+  0% {
+    transform: translateX(-50vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@-webkit-keyframes Contact {
+  0% {
+    transform: translateX(50vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes Contact {
+  0% {
+    transform: translateX(50vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@-webkit-keyframes swell {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes swell {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.fa-envelope:before {
+  content: "\f0e0";
+  font-size: 20px;
+}
+
+.fa-user:before {
+  content: "\f007";
+  font-size: 20px;
+}
+
+.fa-comment:before {
+  content: "\f075";
+  font-size: 20px;
+}
+
+#who-we-are {
+    font-weight: bold;
+    color: #a12f6a;
+}
+
+p.about-us {
+    font-size:1.35em;
+    margin-bottom:15px ;
+}
+
+.last {
+    color: #e43f5a;
+}
+
+#about-us-container {
+    padding: 1% 5%;
+}
+
+#about-us-header {
+    padding: 1.5% 5%;
+}
+
+#about-us-container h3 {
+    color: rgba(121, 41, 212, 0.698);
+}
+
+@media(max-width: 700px) {
+    .fa-user:before {
+        display: none !important;
+    }
+
+    .fa-envelope:before {
+        display: none !important;
+    }
+
+    .fa-comment:before {
+        display: none !important;
+    }
+    
+    .main .bio {
+        background-color: red;
+        display: none;
+    }
+
+    .main .contact {
+        width: 70%;
+    }
+}
+/* =======================End of contact us page================ */
