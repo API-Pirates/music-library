@@ -25,7 +25,7 @@ const client = new pg.Client(process.env.DATABASE_URL);
 
 // .............................................................................. ROUTES
 
-/*Home*/
+/Home/
 app.get('/', handleHomePage);
 
 app.post('/saveEvent', saveToDB);
@@ -426,5 +426,4 @@ function Song(song) {
 client.connect()
     .then(() => {
         app.listen(PORT, () => { console.log('app is running on' + PORT) })
-    })
-    .catch(error => console.log(error + ' error'));
+    }) .catch(error => console.log(error + ' error'));
