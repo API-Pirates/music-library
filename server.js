@@ -19,9 +19,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'))
 
 const PORT = process.env.PORT;
-// const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URL);
 
-const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
+// const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
 
 // .............................................................................. ROUTES
 
@@ -134,17 +134,11 @@ function handleSongsSearches(req, res) {
             testFunction(songs)
             .then(data => {
             
-            console.log(arrayOfObject)
                 res.render("pages/searches", { songSearches: arrayOfObject });
-            
-                // res.send(arrayOfObject);
             })
             .catch(error => {
                 console.log('Error from the test function', error);
             })
-
-
-            res.render("pages/searches", { songSearches: arrayOfObject });
 
         })
         .catch(error => {
@@ -156,8 +150,6 @@ function handleSongsSearches(req, res) {
 
 function youtubeData(artist,song) {
 let mySearch=`${artist} ${song}`
-    // console.log("artist", artist);
-    // console.log("song", song);
     let query = {
         q:mySearch,
         key:process.env.YOUTUBE_KEY,
@@ -171,7 +163,6 @@ let mySearch=`${artist} ${song}`
      return superAgent.get(url).query(query)
         .then(data => {
 
-            // console.log(JSON.parse(data.text).items[0].id.videoId);
              return JSON.parse(data.text).items[0].id.videoId;
         })
         .catch(error => {
@@ -198,24 +189,6 @@ var testFunction = function (songs) {
             });
         }
     })
-}
-
-
-function handleEvents(req, res) {
-    var finalRes = [];
-    let searchQuery = req.query.artist;
-    var result = ['No upcoming events for now, search again later :)'];
-
-    let eventURL = 'https://rest.bandsintown.com/artists/' + searchQuery + '/events';
-
-    return superAgent.get(url).query(query)
-        .then(data => {
-            console.log("Inner from the lyricsData superagent");
-            return data.body.lyrics;
-        })
-        .catch(error => {
-            console.log('Error occurred while getting the lyrics', error);
-        })
 }
 
 // .............................................................................. data model
