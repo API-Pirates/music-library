@@ -19,16 +19,16 @@
     background-repeat: no-repeat;
     background-size: 100%;
     animation-name :slide-bg;
-    animation-duration: 12s;
+    animation-duration: 20s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
 }
 @keyframes slide-bg{
     0%   {background-image: url('../images/bg1.jpg');}
-    25% {background-image: url('../images/bg5.jpeg');}
-    50% {background-image: url('../images/bg3.jpg');}
-    75%  {background-image: url('../images/bg2.jpg');}
-    100% {background-image: url('../images/bg4.jpeg');}
+    20% {background-image: url('../images/bg5.jpeg');}
+    40% {background-image: url('../images/bg3.jpg');}
+    60%  {background-image: url('../images/bg2.jpg');}
+    80% {background-image: url('../images/bg4.jpeg');}
 }
 .forms-hide {
     display: none;
@@ -71,11 +71,11 @@
 /* ..... ...... top 5 songs section styles */
   .grid-container{
       margin-top:  5%;
-     display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-     width: 100%;
-   padding: 0 5%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      width: 100%;
+      padding: 0 5%;
   }
  .grid-item{
      flex : 30%;
@@ -104,7 +104,8 @@
     margin-top: 10%;
     position: relative;
     width: 40%;
-    margin: auto;
+    margin: 5% auto;
+    box-shadow: 1px 10px 18px #000;
    } 
    #home-events img{
     width:100%;
@@ -149,8 +150,6 @@
    /* ............ carousel homepage */ 
   .mySlides {display:none;}
  
-  
-/* .................................................................. END OF HOMEPAGE */
  /* .......................................... mobile view styles  */
  @media( max-width:700px){
     .grid-item{
@@ -168,4 +167,14 @@
     font-size: 1em;
    } 
   }
-
+/* .................................................................. END OF HOMEPAGE */
+/* .................................................................... saved events page */
+.events-flex{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.events-flex form{
+   width: fit-content;
+}
