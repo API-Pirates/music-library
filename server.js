@@ -126,17 +126,11 @@ function handleSongsSearches(req, res) {
             testFunction(songs)
             .then(data => {
             
-            console.log(arrayOfObject)
                 res.render("pages/searches", { songSearches: arrayOfObject });
-            
-                // res.send(arrayOfObject);
             })
             .catch(error => {
                 console.log('Error from the test function', error);
             })
-
-
-            res.render("pages/searches", { songSearches: arrayOfObject });
 
         })
         .catch(error => {
@@ -148,8 +142,6 @@ function handleSongsSearches(req, res) {
 
 function youtubeData(artist,song) {
 let mySearch=`${artist} ${song}`
-    // console.log("artist", artist);
-    // console.log("song", song);
     let query = {
         q:mySearch,
         key:process.env.YOUTUBE_KEY,
@@ -163,12 +155,37 @@ let mySearch=`${artist} ${song}`
      return superAgent.get(url).query(query)
         .then(data => {
 
-            // console.log(JSON.parse(data.text).items[0].id.videoId);
              return JSON.parse(data.text).items[0].id.videoId;
         })
         .catch(error => {
             console.log('Error occurred while getting the lyrics', error);
         })
+}
+function saveToDB(req, res) {
+    var finalRes = [];
+    var result = 'No upcoming events for now, search again later :)'
+    let dataArray = req.body;
+    // console.log(dataArray.description);
+
+    let InsertQuery = 'INSERT INTO event(event_url, status, country, city, region, name, date, saleDate, image_url, description, artistName, facebook_page_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 ,$12) RETURNING *;';
+    let safeValues = [dataArray.offers, dataArray.status, dataArray.country, dataArray.city, dataArray.region, dataArray.namePlace, dataArray.datetime, dataArray.on_sale_datetime, dataArray.image_url, dataArray.description, dataArray.artistName, dataArray.facebook_page_url];
+    client.query(InsertQuery, safeValues).then((data) => {
+        res.redirect('/dataBaseEvents');
+        console.log('added to the database');
+
+    }).catch(error => {
+        console.log('we have an error' + error);
+    });
+}
+
+function handleDataBaseEvents(req, res) {
+    let sql = `SELECT * FROM event`;
+    client.query(sql).then(data => {
+        console.log(data.rows);
+        res.render('dataBaseEvents', { eventResults: data.rows });
+    }).catch(error => {
+        console.log('error on rendering events from DB', error);
+    });
 }
 
 var testFunction = function (songs) {
@@ -190,24 +207,6 @@ var testFunction = function (songs) {
             });
         }
     })
-}
-
-
-function handleEvents(req, res) {
-    var finalRes = [];
-    let searchQuery = req.query.artist;
-    var result = ['No upcoming events for now, search again later :)'];
-
-    let eventURL = 'https://rest.bandsintown.com/artists/' + searchQuery + '/events';
-
-    return superAgent.get(url).query(query)
-        .then(data => {
-            console.log("Inner from the lyricsData superagent");
-            return data.body.lyrics;
-        })
-        .catch(error => {
-            console.log('Error occurred while getting the lyrics', error);
-        })
 }
 
 // .............................................................................. data model
@@ -432,4 +431,3 @@ client.connect()
         app.listen(PORT, () => { console.log('app is running on' + PORT) })
     })
     .catch(error => console.log(error + ' error'));
-
