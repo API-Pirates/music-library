@@ -2,33 +2,39 @@
     <%- include('../layout/navbar')%>
 
         <body>
-            <h3 id="detailHeader">songs</h3>
+            <header class="header">
+                <div class="layout-container">
+                    <h3 id="detailHeader">Events</h3>
+                </div>
+            </header>
             <section>
-                <h3>
-                    <%= data.event_url %>
-                </h3>
-                <h4>
-                    <%= data.venue %>
-                </h4>
-                <h3>
-                    <%= data.title %>
-                </h3>
-                <h4>
-                    <%= data.date %>
-                </h4>
-                <h3>
-                    <%= data.image_url %>
-                </h3>
-                <p>
-                    <%= data.description %>
-                </p>
-                <form action="/deleteDataEvent/<%= data.id %>?_method=Delete" method="post" id="myForm">
-                    <button id="delete"> Delete event</button>
-                </form>
-
-
+                <div class="layout-container">
+                    <section>
+                        <h3>
+                            <%= data.event_url %>
+                        </h3>
+                        <h4>
+                            <%= data.venue %>
+                        </h4>
+                        <h3>
+                            <%= data.title %>
+                        </h3>
+                        <h4>
+                            <%= data.date %>
+                        </h4>
+                        <h3>
+                            <%= data.image_url %>
+                        </h3>
+                        <p>
+                            <%= data.description %>
+                        </p>
+                        <form action="/deleteDataEvent/<%= data.id %>?_method=Delete" method="post" id="myForm">
+                            <button id="delete"> Delete event</button>
+                        </form>
+                    </section>
+                </div>
             </section>
-
+            <%- include('../layout/footer') %>
         </body>
 
         </html>
