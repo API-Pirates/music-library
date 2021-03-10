@@ -19,9 +19,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 const PORT = process.env.PORT;
-/*  const client = new pg.Client(process.env.DATABASE_URL); */
+const client = new pg.Client(process.env.DATABASE_URL);
 
-const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
+// const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
 
 // .............................................................................. ROUTES
 
@@ -100,9 +100,7 @@ function handleHomePage(req, res) {
 }
 
 function handleSongsSearches(req, res) {
-
     let { searchBy, formatInput } = req.query;
-
     let query = {
         apikey: process.env.SONG_API_KEY,
         page_size: 10,
@@ -396,8 +394,7 @@ function EventConstructor(offers, status, country, city, name, region, datetime,
     this.region = region;
     this.datetime = datetime;
     this.on_sale_datetime = on_sale_datetime;
-    this.description = description;
-
+    this.description = description ? description : 'No information on the event';
     this.artistName = artistName || 'unknown value';
     this.thumb_url = thumb_url ? thumb_url : "No Title Available";
     this.facebook_page_url = facebook_page_url;
