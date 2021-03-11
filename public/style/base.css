@@ -170,7 +170,7 @@ footer p {
 
 }
 .card1 .card-summary1 {
-  height: 200px;
+  height: 250px;
   /* padding: 5% 5% 3% 5%; */
 }
 
@@ -185,3 +185,29 @@ footer p {
      margin-bottom: 0;
      margin: 0; 
 }} 
+
+
+
+
+
+.addd {
+    margin-left: 60px;
+    margin-top: 4px;
+    width: 75%;
+    height: 35px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    color: #000;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0px 8px 15px rgb(0 0 0 / 10%);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    background-color: rgb(170, 108, 146);
+    box-shadow: 0px 15px 20px rgb(50 41 126 / 40%);
+    color: #fff;
+    transform: translateY(-7px);}
