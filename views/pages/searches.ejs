@@ -1,11 +1,11 @@
 <%- include('../layout/head')%>
-  <%- include('../layout/navbar')%>
 
-    <body>
+<body>
+      <%- include('../layout/navbar')%>
         <div id='search-song' class="login-box layout-container ">
           <form action="/songs" method="GET">
               <div class="user-box">
-                  <input type="text" name="formatInput" id="song" placeholder="songs">
+                  <input type="text" name="formatInput" id="song" placeholder="Search for songs">
 
                   <label class="search-song-label" for=" singer">Artist</label>
                   <input type="radio" name="searchBy" value="q_artist" id="singer">

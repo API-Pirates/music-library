@@ -12,7 +12,7 @@
 body {
   color:#fff;
   font-family: sans-serif;
-  background: linear-gradient(#1E1F25, #243b55);
+  background-color: #243b55;
   text-align: center;
   width: 100%;
 }
@@ -56,6 +56,17 @@ p{
   line-height: 1.5;
 }
 
+.navbar-expand-lg {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  background-color: #1E1F25;
+}
+
 /* .................................................. navbar */
 nav ul{
 	display: flex;
@@ -72,6 +83,10 @@ nav ul li {
 	margin: auto;
 }
 
+.bg-dark {
+  background-color: rgb(30, 32, 39) !important;
+}
+
 /*  .................. ............................ footer */
 footer{
   padding:  1% 0 ;
@@ -81,21 +96,8 @@ footer{
 footer p {
   font-size: 1.2em;
   font-weight: 500;
+  background-color: rgb(30, 32, 39);
 }
-/* ............................ color palette */
- .color1{
-   background-color: #17223b;
- }
- .color1{
-  background-color: #263859;
-}
-.color1{
-  background-color: #6b778d;
-}
-.color1{
-  background-color: #ff6768;
-}
-/* ................................................... */
 
  /* mobile view styles .................................................  */
 @media( max-width:700px){
@@ -120,3 +122,66 @@ footer p {
   h6{
     font-size: 0.9em;
   }
+
+  /* DetailsSong********************** */
+
+.cards1{
+
+  border: 1px solid #c3c3c3;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-summary11{
+  height: 70px;
+}
+.cards1{
+  width: 111%;
+  height: 100%;
+  border: none;
+}
+#showBook {
+  margin-left: 100px;
+    margin-top: 4px;
+    width: 49%;
+    height: 35px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+  color: #000;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0px 8px 15px rgb(0 0 0 / 10%);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  background-color: rgb(170, 108, 146);
+  box-shadow: 0px 15px 20px rgba(50, 41, 126, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+.container1 {
+
+  width: 40%;
+  margin-right: 10px;
+  display: inline-block;
+
+}
+.card1 .card-summary1 {
+  height: 200px;
+  /* padding: 5% 5% 3% 5%; */
+}
+
+.card1 .card-title1 h3 {
+
+  height: 32px;
+}
+@media (min-width: 700px){
+.card1 {
+    width: 100%;
+    margin-right: 0; 
+     margin-bottom: 0;
+     margin: 0; 
+}} 

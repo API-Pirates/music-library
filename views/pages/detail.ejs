@@ -233,6 +233,20 @@
 
         }
 
+        #myForm {
+            display: inline;
+            margin-right: 25px;
+        }
+
+        .lyrics-overflow {
+            overflow-y: scroll;
+            height: 300px;
+        }
+
+        .events-flex {
+            text-align: center;
+        }
+
         .inside {
             margin: 1%;
             overflow-y: scroll;
@@ -324,7 +338,7 @@
                                 <span>Genre: </span>
                                 <%= data.genre %>
                             </h5>
-                            <h5>
+                            <h5 class="lyrics-overflow">
                                 <span>Lyrics:</span>
                                 <%= data.lyrics %> <br>
                             </h5>

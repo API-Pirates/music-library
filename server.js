@@ -19,13 +19,11 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 const PORT = process.env.PORT;
-
 const client = new pg.Client(process.env.DATABASE_URL);
 
 // const client = new pg.Client({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
 
 // .............................................................................. ROUTES
-
 
 app.get('/', handleHomePage);
 
@@ -396,6 +394,8 @@ function EventConstructor(offers, status, country, city, name, region, datetime,
 
 };
 
+let singers = ['adele', 'amr diab', 'chris brown', 'david Guetta', 'drake', 'dua lipa', 'ed sheeran', 'eminem', 'imagine dragons', 'justin bieber', 'katy perry', 'maroon 5', 'metallica', 'rihanna', 'sia'];
+
 function Song(song) {
     // console.log('The data passed to the construct', song);
     let genre;
@@ -413,7 +413,13 @@ function Song(song) {
     this.genre = genre;
     this.youtube = song.youtube;
     this.lyrics = song.lyrics || "none";
-    this.image_url = song.image_url || "images/default song.jpg";
+    singers.forEach(singer => {
+        if (singer === this.artist) {
+            this.image_url = `images/Singers/${this.artist.toLowerCase()}.jpg`;
+        } else {
+            this.image_url = "images/default2 song.jpg";
+        }
+    })
 }
 
 // .............................................................................. CONNECTION
