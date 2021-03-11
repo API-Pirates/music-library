@@ -2,48 +2,32 @@
 .layout-container{
    padding: 2% 5%;
    width: 100%;
-       margin-bottom: 26px;
+       margin-bottom: 10px;
+   /* background-color: rgb(82, 1, 46); */
 }
 
 .display-books{
-  /* height: 200px; */
-  /* margin-bottom: 20px; */
-    /* width:500px ; */
     width: 50%;
     background-color: blue;
     margin: 5% 1%;
 }
   
   .login-box {
-    /* position: relative;
-    top: 65%;
-    left: 50%; */
     margin: 1% auto;
-    width: 60%;
     /* height: 260px; */
-    
     /* margin: auto; */
     /* transform: translate(-50%, -50%); */
+    width: 50%;
     background: rgba(0,0,0,.5);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 10px;
   }
   
-  /* .login-box h2 {
-    margin: 0 0 30px;
-    padding: 0;
-    color: #fff;
-    text-align: center;
-  } */
-  
   .navbar-dark .navbar-nav .nav-link:hover {
     color: #C13264;
 }
 
-  .login-box .user-box {
-    /* position: relative; */
-  }
   .login-box .user-box input:first-child{
     width: 100%;
   }
@@ -58,16 +42,12 @@
     background: transparent;
   }
   .login-box .user-box label {
-    /* position: absolute;
-    top:0;
-    left: 0; */
     padding: 10px 0;
     font-size: 16px;
     color: #fff;
     pointer-events: none;
     transition: .5s;
   }
-  /* background-color: #222029; */
   .login-box .user-box input:valid ~ label {
     top: -20px;
     left: 0;
@@ -125,7 +105,6 @@
 
     .login-box .user-box input {
       padding: 0;
-      /* margin-bottom: 30px; */
       border-bottom: 1px solid #fff;
     }
 
@@ -150,12 +129,6 @@
     margin-bottom: 3%;
 
 }
-/* .conSEarch{
-
-  height: 50%;
-  
-  width: 50%;
-} */
 .form{
   display: inline;
   position:relative;
@@ -250,7 +223,7 @@
     background-color: rgba(255, 255, 255, 0);
   }
   .card1 .card-title1 {
-    background: rgba(157, 187, 63, 0.85);
+    background-color: #7b2050c9;
     padding: 3.5% 0 2.5% 0;
     color: white;
     font-family: "Roboto Condensed", sans-serif;
@@ -294,7 +267,7 @@
     box-shadow: rgba(0, 0, 0, 0.45) 0px 0px 20px 0px;
   }
   .card1:hover .card-title1, .card1:focus .card-title1 {
-    background: rgba(157, 187, 63, 0.95);
+    background: rgb(170, 108, 146);
   }
   .card1:hover .card-meta1, .card1:focus .card-meta1 {
     max-height: 2em;

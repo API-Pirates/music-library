@@ -45,50 +45,82 @@
     </style>
 </head>
 
-<body>
-    <%- include('./layout/navbar')%>
-        <header class="header">
-            <div class="layout-container">
-                <h1>Saved Events </h1>
+        <body>
 
-            </div>
-        </header>
-        <section id='home-events'>
-            <div class="layout-container">
-                <div class="w3-content w3-section">
-                    <% eventResults.forEach(event=> { %>
-                        <article>
-                            <img src="<%= event.image_url %>" alt="">
-                            <figcaption>
-                                <h3> <span>Artist: </span>
-                                    <%= event.artistname %>
-                                </h3>
-                                <h5><span>status:</span>
-                                    <%= event.status %>
-                                </h5>
-                                <h5><span>Place:</span>
-                                    <%= event.name %>
-                                </h5>
-                                <h5><span>location:</span>
-                                    <%= event.country +`, ` + event.city +`, `+ event.region %>
-                                </h5>
-                                <h5><span>datetime:</span>
-                                    <%= event.date %>
-                                </h5>
-                                <h5> <span>On sale datetime:</span>
-                                    <%= event.saledate %>
-                                </h5>
-                                <h5> <span>Description:</span>
-                                    <%= event.description %>
-                                </h5>
-                                <h5> <span>Facebook Profile:</span>: <a href="<%= event.facebook_page_url %>">Visit
-                                        Facebook</a>
-                                </h5>
+            <nav class="navbar navbar-expand-lg navbar-dark ">
+                <a class="navbar-brand" href="/">
+                    <img id="logo" src="../images/logo.png" alt="">
+        
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" >Home </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/datasong ">Music </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dataBaseEvents" style="color: #C13264;">Event</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+        
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
 
-                                <div class="events-flex">
-                                    <form action="<%= event.event_url %>">
-                                        <input class="home-event-button1" type="submit" value="Book Your Ticket " />
-                                    </form>
+            <header class="header">
+                <div class="layout-container">
+                    <h1>Saved Events </h1>
+
+                </div>
+            </header>
+
+            <section id='home-events'>
+                <div class="layout-container">
+                    <div class="w3-content w3-section">
+                        <% eventResults.forEach(event=> { %>
+                            <article>
+                                <img src="<%= event.image_url %>" alt="">
+                                <figcaption>
+                                    <h3> <span>Artist: </span>
+                                        <%= event.artistname %>
+                                    </h3>
+                                    <h5><span>Status:</span>
+                                        <%= event.status %>
+                                    </h5>
+                                    <h5><span>Place:</span>
+                                        <%= event.name %>
+                                    </h5>
+                                    <h5><span>Location:</span>
+                                        <%= event.country +`, ` + event.city +`, `+ event.region %>
+                                    </h5>
+                                    <h5><span>Datetime:</span>
+                                        <%= event.date %>
+                                    </h5>
+                                    <h5> <span>Sale Date:</span>
+                                        <%= event.saledate %>
+                                    </h5>
+                                    <h5> <span>Description:</span>
+                                        <%= event.description %>
+                                    </h5>
+                                    <h5> <span>Facebook Page:</span>: <a href="<%= event.facebook_page_url %>">
+                                            Facebook</a>
+                                    </h5>
+
+                                    <div class="events-flex">
+                                        <form action="<%= event.event_url %>">
+                                            <input class="home-event-button1" type="submit" value="Book Ticket " />
+                                        </form>
 
                                     <form action="/deleteDataEvent/<%= event.id %>?_method=Delete" method="post"
                                         id="myForm">
@@ -107,7 +139,6 @@
                                         <input type="hidden" name=" description" value="<%= event.description %>"
                                             hidden>
                                         <input type="hidden" name="image_url" value="<%= event.thumb_url %>" hidden>
-
                                         <input type="hidden" name="artistName" value="<%= event.artistName %>" hidden>
 
                                         <input type="hidden" name="facebook_page_url"
@@ -133,8 +164,6 @@
                         <br>
                         <input type="hidden" name="artistName" value="<%= event.artistName %>"><br>
                         <input type="hidden" name="facebook_page_url" value="<%= event.facebook_page_url %>"><br>
-
-                        <!-- <button id="saveforLater" type="submit">Save for later</button> <br> -->
                     </form>
 
                     </article>

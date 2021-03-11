@@ -98,49 +98,6 @@ footer p {
   font-weight: 500;
   background-color: rgb(30, 32, 39);
 }
-/* nav ul li:hover {
-  background-image: url('https://scottyzen.sirv.com/Images/v/button.png');
-  background-size: 100% 100%;
-  color: #27262c;
-  animation: spring 300ms ease-out;
-  text-shadow: 0 -1px 0 pink;
-	font-weight: bold;
-}
-nav ul li:active {
-  transform: translateY(4px);
-} */
-/* ............................ color palette */
- .color1{
-   background-color: #17223b;
- }
- .color1{
-  background-color: #263859;
-}
-.color1{
-  background-color: #6b778d;
-}
-.color1{
-  background-color: #ff6768;
-}
-/* ................................................... */
-/* @keyframes spring {
-  15% {
-    -webkit-transform-origin: center center;
-    -webkit-transform: scale(1.2, 1.1);
-  }
-  40% {
-    -webkit-transform-origin: center center;
-    -webkit-transform: scale(0.95, 0.95);
-  }
-  75% {
-    -webkit-transform-origin: center center;
-    -webkit-transform: scale(1.05, 1);
-  }
-  100% {
-    -webkit-transform-origin: center center;
-    -webkit-transform: scale(1, 1);
-  }
-} */
 
  /* mobile view styles .................................................  */
 @media( max-width:700px){
@@ -167,7 +124,64 @@ nav ul li:active {
   }
 
   /* DetailsSong********************** */
-  
-/* .updateSongs223 {
-  display: none;
-} */
+
+.cards1{
+
+  border: 1px solid #c3c3c3;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-summary11{
+  height: 70px;
+}
+.cards1{
+  width: 111%;
+  height: 100%;
+  border: none;
+}
+#showBook {
+  margin-left: 100px;
+    margin-top: 4px;
+    width: 49%;
+    height: 35px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+  color: #000;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0px 8px 15px rgb(0 0 0 / 10%);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  background-color: rgb(170, 108, 146);
+  box-shadow: 0px 15px 20px rgba(50, 41, 126, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}
+.container1 {
+
+  width: 40%;
+  margin-right: 10px;
+  display: inline-block;
+
+}
+.card1 .card-summary1 {
+  height: 200px;
+  /* padding: 5% 5% 3% 5%; */
+}
+
+.card1 .card-title1 h3 {
+
+  height: 32px;
+}
+@media (min-width: 700px){
+.card1 {
+    width: 100%;
+    margin-right: 0; 
+     margin-bottom: 0;
+     margin: 0; 
+}} 
